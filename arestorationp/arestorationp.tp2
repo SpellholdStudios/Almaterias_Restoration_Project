@@ -1,7 +1,8 @@
 BACKUP ~arestorationp/backup~
-AUTHOR ~Almateria (bukato@icloud.com)~
-VERSION ~v8.4~
-README "arestorationp/language/%LANGUAGE%/readme.html" "arestorationp/language/english/readme.html"
+//AUTHOR 
+SUPPORT ~http://www.shsforums.net/forum/658-almaterias-restoration-project/~
+VERSION ~v9~
+README "arestorationp/language/%LANGUAGE%/readme.arp.html" "arestorationp/language/english/readme.arp.html"
 AUTO_TRA ~arestorationp/language/%s~
 //%
 
@@ -36,14 +37,16 @@ ALWAYS
     latin => cp1252
     faroese => cp1252
     polish => cp1250
+    russian => cp1251
     schinese => cp936
     french => cp1252
-		german => cp1252
-		ptbr => cp1252
+    german => cp1252
+    ptbr => cp1252
+    czech => CP1250
   END
   LAF HANDLE_CHARSETS
     INT_VAR
-      infer_charset = 0
+      infer_charsets = 0
     STR_VAR
       tra_path = EVAL ~%MOD_FOLDER%/language~
       noconvert_array = l-noconvert
@@ -58,47 +61,47 @@ LANGUAGE ~Polski~
          ~arestorationp/language/english/game.tra~
          ~arestorationp/language/english/setup.tra~
          ~arestorationp/language/polish/game.tra~
-         ~arestorationp/language/polish/setup-%WEIDU_OS%.tra~
+         ~arestorationp/language/polish/setup.tra~
 LANGUAGE ~English~
 		 ~english~
 		 ~arestorationp/language/english/game.tra~
-		 ~arestorationp/language/english/setup-%WEIDU_OS%.tra~
+		 ~arestorationp/language/english/setup.tra~
 LANGUAGE ~Italiano (by Sergio)~
 		 ~italian~
          ~arestorationp/language/english/game.tra~
          ~arestorationp/language/english/setup.tra~
          ~arestorationp/language/italian/game.tra~
-         ~arestorationp/language/italian/setup-%WEIDU_OS%.tra~
+         ~arestorationp/language/italian/setup.tra~
 LANGUAGE ~Nederlands (by Tzarnal)~
 		 ~dutch~
          ~arestorationp/language/english/game.tra~
          ~arestorationp/language/english/setup.tra~
          ~arestorationp/language/dutch/game.tra~
-         ~arestorationp/language/dutch/setup-%WEIDU_OS%.tra~
+         ~arestorationp/language/dutch/setup.tra~
 LANGUAGE ~lingua latina (by Sleep of Bronze)~
 		 ~latin~
          ~arestorationp/language/english/game.tra~
          ~arestorationp/language/english/setup.tra~
          ~arestorationp/language/latin/game.tra~
-         ~arestorationp/language/latin/setup-%WEIDU_OS%.tra~
+         ~arestorationp/language/latin/setup.tra~
 LANGUAGE ~Foeroyskr (BG2EE) (by inscrutable horse)~
 		 ~faroese~
          ~arestorationp/language/english/game.tra~
          ~arestorationp/language/english/setup.tra~
          ~arestorationp/language/faroese/game.tra~
-         ~arestorationp/language/faroese/setup-%WEIDU_OS%.tra~
+         ~arestorationp/language/faroese/setup.tra~
 LANGUAGE ~Simplified Chinese (by Sebastian C)~
 		 ~schinese~
          ~arestorationp/language/english/game.tra~
          ~arestorationp/language/english/setup.tra~
          ~arestorationp/language/schinese/game.tra~
-         ~arestorationp/language/schinese/setup-%WEIDU_OS%.tra~
+         ~arestorationp/language/schinese/setup.tra~
 LANGUAGE ~Francais (by Isaya and the d'Oghmatiques)~
 		 ~french~
          ~arestorationp/language/english/game.tra~
          ~arestorationp/language/english/setup.tra~
          ~arestorationp/language/french/game.tra~
-         ~arestorationp/language/french/setup-%WEIDU_OS%.tra~
+         ~arestorationp/language/french/setup.tra~
 LANGUAGE ~Deutsch (by Dachrisma)~
 		 ~german~
          ~arestorationp/language/english/game.tra~
@@ -111,8 +114,20 @@ LANGUAGE ~Portugues brasileiro (by Felipe)~
          ~arestorationp/language/english/setup.tra~
          ~arestorationp/language/ptbr/game.tra~
          ~arestorationp/language/ptbr/setup.tra~
+LANGUAGE ~Russian (by Austin & ArcaneCoast.ru)~
+		 ~russian~
+         ~arestorationp/language/english/game.tra~
+         ~arestorationp/language/english/setup.tra~
+         ~arestorationp/language/russian/game.tra~
+LANGUAGE ~Czech (by Radim "Edvin" Klimek)~
+		~czech~
+         ~arestorationp/language/czech/game.tra~
+         ~arestorationp/language/czech/setup.tra~
+         ~arestorationp/language/czech/game.tra~
+         ~arestorationp/language/czech/setup.tra~
 
 BEGIN @100
+LABEL Almaterias_Restoration_Project-Restored_Locations
 ACTION_IF FILE_EXISTS_IN_GAME ~clck28.itm~ BEGIN
 COPY_EXISTING ~clck28.itm~ ~override/l-clck.itm~
 END
@@ -396,6 +411,7 @@ DisplayStringHead(Player1,57967)~
 END
 
 BEGIN @200
+LABEL Almaterias_Restoration_Project-Restored_Characters_and_Dialogs
 COMPILE ~arestorationp/dlg/mage2.d~
 COPY_EXISTING ~cuwiz1.cre~ ~override/l-mage01.cre~
 WRITE_ASCII 0x0250 ~mage18c~ #8
@@ -895,6 +911,7 @@ PRINT "Multiplayer dialogues are not Solaufein-compatible or Tweaks-compatible. 
 END
 
 BEGIN @300
+LABEL Almaterias_Restoration_Project-Restored_Sounds
 COPY_EXISTING ~ammerc01.cre~ ~override~
 	SAY DAMAGE ~~ [1AMERC03]
 	SAY DYING ~~ [1AMERC04]
@@ -2134,6 +2151,7 @@ REINCLUDE ~override/restorestring.tpa~
 END
 
 BEGIN @500
+LABEL Almaterias_Restoration_Project-Restored_Items
 COPY_EXISTING bolt08.itm override
 WRITE_LONG 0x0034 10000
 WRITE_LONG 0x0060 3
@@ -2212,17 +2230,20 @@ END
 BUT_ONLY
 
 BEGIN @600
+LABEL Almaterias_Restoration_Project-Restored_Wish_Options
 COPY_EXISTING ~wish.2da~ ~override~
 SET_2DA_ENTRY 27 4 2 ~38~
 SET_2DA_ENTRY 28 1 2 ~39~
 COMPILE ~arestorationp/dlg/wish25.d~
 
 BEGIN @700
+LABEL Almaterias_Restoration_Project-Restored_XP_for_Minor_Things
 COMPILE ~arestorationp/dlg/yagcon.d~
 COMPILE ~arestorationp/dlg/head1.d~
 COMPILE ~arestorationp/dlg/amsmith.d~
 
 BEGIN @800
+LABEL Almaterias_Restoration_Project-Lich_Deril
 COMPILE ~arestorationp/baf/cedelich.baf~
 COPY_EXISTING ~grvlch01.cre~ ~override/cedelich.cre~
 WRITE_LONG 0x0014 26000
@@ -2248,6 +2269,7 @@ EXTEND_BOTTOM ~ar1004.bcs~ ~arestorationp/baf/ar1004.baf~
 EXTEND_BOTTOM ~cernd.bcs~ ~arestorationp/baf/cernd.baf~ EVALUATE_BUFFER
 
 BEGIN @900
+LABEL Almaterias_Restoration_Project-Restored_Random_Encounters
 COMPILE ~arestorationp/baf/l-ar01.baf~
 COPY_EXISTING ~ar0044.are~ ~override/l-ar01.are~
 	WRITE_ASCII 0x0094 ~l-ar01~ #8
@@ -2374,6 +2396,7 @@ COPY - "%wold%" "%wold%"
  R_B_B EVALUATE_BUFFER "%wold%" "%wnew%"
 
 BEGIN @1000
+LABEL Almaterias_Restoration_Project-Minor_Restorations
 COPY_EXISTING ~ar4000.are~ ~override/L-SAR1.are~
 
 APPEND ~MASTAREA.2da~ ~L-SAR1 value~
@@ -2517,16 +2540,19 @@ BEGIN ~~
 DEPRECATED @1100
 
 BEGIN @1200
+LABEL Almaterias_Restoration_Project-Better_Item_Import
 REQUIRE_PREDICATE NOT GAME_IS ~bg2ee eet~ @1201
 COPY_EXISTING ~ar0602.bcs~ ~override~
   DECOMPILE_AND_PATCH BEGIN
-    REPLACE_TEXTUALLY ~ActionOverride("Malaaq",MoveBetweenAreas("AR0601",\[345\.591\],SE))~ ~ActionOverride("Malaaq",TakeItemListPartyNum("IMPORT02",1))~
+    REPLACE_TEXTUALLY ~ActionOverride("Malaaq",MoveBetweenAreas("AR0601",\[345\.591\],SE))~ ~\1 
+	ActionOverride("Malaaq",TakeItemListPartyNum("IMPORT02",1))~
   END
-	
+/*	
 COPY_EXISTING ~idemon01.cre~ ~override~
               ~idemon02.cre~ ~override~
   REMOVE_CRE_ITEM ~sw1h01~ ~sw1h02~ ~sw2h16~
   ADD_CRE_ITEM ~sw2h16~ #0 #0 #0 ~NONE~ ~WEAPON1~ EQUIP TWOHANDED
+*/
 	
 COPY_EXISTING ~idjinni.cre~ ~override~
   REMOVE_CRE_ITEM ~sw2h16~
@@ -2564,6 +2590,7 @@ COPY_EXISTING ~ar1401.are~ ~override~
   LPF fj_are_structure INT_VAR fj_con_itm_idx = 2 STR_VAR fj_name = slng10 fj_structure_type = itm END
 
 BEGIN @1300
+LABEL Almaterias_Restoration_Project-Restored_Final_Slayer_Dream
 EXTEND_BOTTOM ~player1d.bcs~ ~arestorationp/baf/player1d.baf~
 EXTEND_BOTTOM ~ar2700.bcs~ ~arestorationp/baf/ar2700.baf~
 
@@ -2681,11 +2708,13 @@ LAF sc#addWmpAre
 RET areNum = areNum END
 
  BEGIN @1400
+LABEL Almaterias_Restoration_Project-Alternate_Slayer_Change
  REQUIRE_COMPONENT "setup-arestorationp.tp2" "11" ~Requires the previous component.~
  COMPILE ~arestorationp/dlg/player1.d~
  EXTEND_TOP ~ar4000.bcs~ ~arestorationp/baf/ar4000.baf~
 
  BEGIN @1500
+LABEL Almaterias_Restoration_Project-Restored_Waukeens_Promenade_Cutscene
  COMPILE ~arestorationp/baf/cut01a.baf~
 COMPILE ~arestorationp/baf/cut01c.baf~
 COMPILE ~arestorationp/baf/cut01e.baf~
