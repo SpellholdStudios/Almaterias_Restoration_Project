@@ -14,7 +14,7 @@
 **Mod Website and Forum:** <a href="http://www.shsforums.net/forum/658-almaterias-restoration-project/">Almateria's Restoration Project</a>  
 
 
-[Read the mod's readme](http://spellholdstudios.github.io/readmes/readme.arp.html).
+[Read the mod's readme](https://spellholdstudios.github.io/readmes/readme.arp.html).
 
 [Download the mod at Spellhold Studios](http://www.shsforums.net/files/file/1053-almaterias-restoration-project/).<br>
 
