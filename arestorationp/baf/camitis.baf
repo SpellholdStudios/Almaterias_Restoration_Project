@@ -1,0 +1,7 @@
+IF
+	Dead("Amsi")
+	Allegiance(Myself,NEUTRAL)
+THEN
+	RESPONSE #100
+		StartDialogueNoSet([PC])
+END

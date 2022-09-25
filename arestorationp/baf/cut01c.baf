@@ -1,0 +1,42 @@
+IF
+  True()
+THEN
+  RESPONSE #100
+    CutSceneId(Player1)
+    CreateVisualEffect("SPBURN",[2350.814])
+    CreateVisualEffect("SPBURN",[2643.751])
+    SmallWait(7)
+    CreateVisualEffect("SPBURN",[2383.905])
+    CreateVisualEffect("SPBURN",[2485.683])
+    SmallWait(8)
+    CreateVisualEffect("SPBURN",[2694.976])
+END
+
+IF
+  True()
+THEN
+  RESPONSE #100
+    CutSceneId("CSIren")
+	DisplayStringWait("CSImoen",16797)
+    Face(10)
+    Wait(1)
+    DisplayStringWait(Myself,2854)
+    DisplayStringWait("CSImoen",2855)
+    DisplayStringWait(Myself,2857)
+    DisplayStringWait("CSImoen",2858)
+    DisplayStringWait(Myself,2859)
+    DisplayStringWait("CSImoen",2863)
+    ActionOverride("CSImoen",ForceSpell("CSIren",MAGIC_MISSILE_SURE_HIT))
+    Wait(2)
+    DisplayStringWait(Myself,2865) // 2865
+    SetGlobal("CutScene01","AR0700",2)
+    StartCutScene("cut01d")
+END
+
+IF
+  True()
+THEN
+  RESPONSE #100
+    CutSceneId("CSImoen")
+END
+

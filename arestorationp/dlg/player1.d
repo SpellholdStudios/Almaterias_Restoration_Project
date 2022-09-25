@@ -1,0 +1,2 @@
+REPLACE_TRANS_TRIGGER player1 BEGIN 27 END BEGIN 0 END ~False()~ ~Global("MasteredTheSlayer","GLOBAL",0)~
+REPLACE_TRANS_TRIGGER player1 BEGIN 27 END BEGIN 2 END ~True()~ ~Global("MasteredTheSlayer","GLOBAL",1)~

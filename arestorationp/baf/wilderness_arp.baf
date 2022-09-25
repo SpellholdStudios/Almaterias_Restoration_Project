@@ -1,0 +1,23 @@
+IF
+	OnCreation()
+	Global("RandomEncounters","GLOBAL",3)
+	Global("L-SpawnedBogre","GLOBAL",0)
+	GlobalLT("Chapter","GLOBAL",%bg2_chapter_4%)
+THEN
+	RESPONSE #100
+	CreateCreature("bogre1",[410.327],2)
+	SetGlobal("L-SpawnedBogre","GLOBAL",1)
+	Continue()
+END
+
+IF
+	OnCreation()
+THEN
+	RESPONSE #100
+		CreateCreature("REBAND01",[488.558],10)
+		CreateCreature("REBAND02",[500.454],10)
+		CreateCreature("REBAND03",[552.476],10)
+		CreateCreature("REBAND04",[427.548],10)
+		CreateCreature("REBAND05",[525.591],10)
+		Continue()
+END

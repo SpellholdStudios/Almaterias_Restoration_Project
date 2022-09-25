@@ -1,0 +1,7 @@
+IF
+	Global("DerilLich","GLOBAL",3)
+THEN
+	RESPONSE #100
+	CreateCreature("cedelich",[730.608],2)
+	SetGlobal("DerilLich","GLOBAL",4)
+END

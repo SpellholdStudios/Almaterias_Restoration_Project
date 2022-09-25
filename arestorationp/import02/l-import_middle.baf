@@ -1,0 +1,135 @@
+IF
+  HasItem("SW2H99",Myself)
+  Global("L-IMPORT02","GLOBAL",0)
+  CheckStatGT(Player1,1,PROFICIENCYLONGSWORD)
+  !Class(Player1,CLERIC_ALL)
+  !Class(Player1,DRUID_ALL)
+  !Class(Player1,MAGE)
+  !Class(Player1,SORCERER)
+  !Kit(Player1,BEASTMASTER)
+THEN
+  RESPONSE #100
+    DestroyItem("SW2H99")
+		DestroyItem("SW2H16")
+    CreateItem("SW1H06",0,0,0) 
+    SetGlobal("L-IMPORT02","GLOBAL",9)
+END
+
+IF
+  HasItem("SW2H99",Myself)
+  Global("L-IMPORT02","GLOBAL",0)
+  CheckStatGT(Player1,%index%,PROFICIENCYWARHAMMER)
+  !Class(Player1,DRUID_ALL)
+  !Class(Player1,THIEF)
+  !Class(Player1,MAGE_THIEF)
+  !Class(Player1,MAGE)
+  !Class(Player1,SORCERER)
+  !Class(Player1,MONK)
+  !Kit(Player1,BEASTMASTER)
+THEN
+  RESPONSE #100
+    DestroyItem("SW2H99")
+		DestroyItem("SW2H16")
+    CreateItem("HAMM03",0,0,0)
+		SetGlobal("L-IMPORT02","GLOBAL",2)
+END
+
+IF
+  HasItem("SW2H99",Myself)
+  Global("L-IMPORT02","GLOBAL",0)
+  CheckStatGT(Player1,%index%,PROFICIENCYAXE)
+  !Class(Player1,CLERIC_ALL)
+  !Class(Player1,DRUID_ALL)
+  !Class(Player1,THIEF)
+  !Class(Player1,MAGE_THIEF)
+  !Class(Player1,MAGE)
+  !Class(Player1,SORCERER)
+  !Class(Player1,MONK)
+  !Kit(Player1,BEASTMASTER)
+THEN
+  RESPONSE #100
+    DestroyItem("SW2H99")
+		DestroyItem("SW2H16")
+		CreateItem("AX1H07",0,0,0)
+    SetGlobal("L-IMPORT02","GLOBAL",3)
+END
+
+IF
+  HasItem("SW2H99",Myself)
+  Global("L-IMPORT02","GLOBAL",0)
+  CheckStatGT(Player1,%index%,PROFICIENCYHALBERD)
+  !Class(Player1,CLERIC_ALL)
+  !Class(Player1,DRUID_ALL)
+  !Class(Player1,THIEF)
+  !Class(Player1,MAGE_THIEF)
+  !Class(Player1,MAGE)
+  !Class(Player1,SORCERER)
+  !Class(Player1,MONK)
+  !Kit(Player1,BEASTMASTER)
+THEN
+  RESPONSE #100
+    DestroyItem("SW2H99")
+    DestroyItem("SW2H16")
+		CreateItem("HALB03",0,0,0)
+    SetGlobal("L-IMPORT02","GLOBAL",4)
+END
+
+IF
+  HasItem("SW2H99",Myself)
+  Global("L-IMPORT02","GLOBAL",0)
+  CheckStatGT(Player1,%index%,PROFICIENCYDAGGER)
+  !Class(Player1,CLERIC_ALL)
+  !Kit(Player1,BEASTMASTER)
+THEN
+  RESPONSE #100
+    DestroyItem("SW2H99")
+    DestroyItem("SW2H16")
+		CreateItem("DAGG04",0,0,0)
+    SetGlobal("L-IMPORT02","GLOBAL",5)
+END
+
+IF
+  HasItem("SW2H99",Myself)
+  Global("L-IMPORT02","GLOBAL",0)
+  CheckStatGT(Player1,%index%,PROFICIENCYQUARTERSTAFF)
+  !Class(Player1,MONK)
+THEN
+  RESPONSE #100
+    DestroyItem("SW2H99")
+    DestroyItem("SW2H16")
+		CreateItem("STAF07",0,0,0) 
+    SetGlobal("L-IMPORT02","GLOBAL",100)
+END
+
+IF
+  HasItem("SW2H99",Myself)
+  Global("L-IMPORT02","GLOBAL",0)
+  CheckStatGT(Player1,%index%,PROFICIENCYSLING)
+  !Kit(Player1,CAVALIER)
+  !Kit(Player1,KENSAI)
+THEN
+  RESPONSE #100
+    DestroyItem("SW2H99")
+    DestroyItem("SW2H16")
+		CreateItem("SLNG05",0,0,0) 
+    SetGlobal("L-IMPORT02","GLOBAL",8)
+END
+
+IF
+  HasItem("SW2H99",Myself)
+  Global("L-IMPORT02","GLOBAL",0)
+  CheckStatGT(Player1,%index%,PROFICIENCYMACE)
+  !Class(Player1,DRUID_ALL)
+  !Class(Player1,THIEF)
+  !Class(Player1,MAGE_THIEF)
+  !Class(Player1,MAGE)
+  !Class(Player1,SORCERER)
+  !Class(Player1,MONK)
+  !Kit(Player1,BEASTMASTER)
+THEN
+  RESPONSE #100
+    DestroyItem("SW2H99")
+    DestroyItem("SW2H16")
+		CreateItem("BLUN11",0,0,0) 
+    SetGlobal("L-IMPORT02","GLOBAL",100)
+END

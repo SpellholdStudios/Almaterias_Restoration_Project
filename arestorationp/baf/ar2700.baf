@@ -1,0 +1,15 @@
+IF
+	Global("MasteredTheSlayer","GLOBAL",1)
+THEN
+	RESPONSE #100
+	TriggerActivation("Face01",FALSE)
+	TriggerActivation("Face02",FALSE)
+	TriggerActivation("Face03",FALSE)
+	TriggerActivation("Face04",FALSE)
+	TriggerActivation("Face05",FALSE)
+	TriggerActivation("Face06",FALSE)
+	TriggerActivation("Face07",FALSE)
+	TriggerActivation("Face08",FALSE)
+	TriggerActivation("Face09",FALSE)
+	TriggerActivation("Face10",FALSE)
+END

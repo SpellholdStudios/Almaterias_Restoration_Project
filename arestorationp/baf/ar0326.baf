@@ -1,0 +1,7 @@
+IF
+PartyHasItem("MISC7M")
+Global("KnowValygarCabin","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("KnowValygarCabin","GLOBAL",1)
+END

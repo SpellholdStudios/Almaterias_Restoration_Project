@@ -1,0 +1,20 @@
+IF
+OpenState("Door02",FALSE)
+OpenState("Door03",FALSE)
+Global("L-GiveWKHint","GLOBAL",0)
+THEN
+RESPONSE #100
+TriggerActivation("L-TILE1",FALSE)
+TriggerActivation("L-TILE2",FALSE)
+END
+
+IF
+OpenState("Door02",TRUE)
+OpenState("Door03",TRUE)
+Global("L-GiveWKHint","GLOBAL",0)
+THEN
+RESPONSE #100
+TriggerActivation("L-TILE1",TRUE)
+TriggerActivation("L-TILE2",TRUE)
+SetGlobal("L-GiveWKHint","GLOBAL",1)
+END

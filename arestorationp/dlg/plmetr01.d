@@ -1,0 +1,1 @@
+ADD_TRANS_ACTION ~plmetr01~ BEGIN 26 END BEGIN END ~ActionOverride("plfarm03",Enemy())~

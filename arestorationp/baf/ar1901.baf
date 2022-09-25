@@ -1,0 +1,9 @@
+IF
+    Global("GrovePoisoned","GLOBAL",0)
+    Dead("cefald01")
+    Global("L-SpawnedDrenden","GLOBAL",0)
+THEN
+    RESPONSE #100
+        CreateCreature("DRENDEN",[1647.462])
+        SetGlobal("L-SpawnedDrenden","GLOBAL",1)
+END

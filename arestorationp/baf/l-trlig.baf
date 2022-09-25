@@ -1,0 +1,7 @@
+IF
+	Entered([ANYONE])
+        Global("L-ImoenLightning","AR0602",0)
+THEN
+	RESPONSE #100
+                SetGlobal("L-ImoenLightning","AR0602",1)
+END

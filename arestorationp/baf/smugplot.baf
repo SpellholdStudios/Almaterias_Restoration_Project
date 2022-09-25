@@ -1,0 +1,34 @@
+IF
+	Class(Myself,MONK)
+	Allegiance(Myself,NEUTRAL)
+	AttackedBy([GOODCUTOFF],DEFAULT)
+	Global("Attacked","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetGlobal("Attacked","LOCALS",1)
+		ActionOverride("ammonk02",SetGlobal("Attacked","LOCALS",1))
+		ActionOverride("ammonk02",StartDialogueNoSet([PC]))
+END
+
+
+IF
+	Class(Myself,THIEF)
+	Allegiance(Myself,NEUTRAL)
+	AttackedBy([GOODCUTOFF],DEFAULT)
+	Global("L-AttackedSmugglers","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("L-AttackedSmugglers","GLOBAL",1)
+		ActionOverride("amcarras",StartDialogueNoSet([PC]))
+END
+
+IF
+	Class(Myself,MAGE_THIEF)
+	Allegiance(Myself,NEUTRAL)
+	AttackedBy([GOODCUTOFF],DEFAULT)
+	Global("L-AttackedSmugglers","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("L-AttackedSmugglers","GLOBAL",1)
+		StartDialogueNoSet([PC])
+END

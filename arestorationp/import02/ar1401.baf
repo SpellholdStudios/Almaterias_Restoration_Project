@@ -1,0 +1,18 @@
+IF
+  HasItem("slng05","Container3")
+  HasItem("slng10","Container3")
+  Global("L-IMPORT02","GLOBAL",8)
+THEN
+  RESPONSE #100
+    ActionOverride("Container3",DestroyItem("slng05"))
+    SetGlobal("L-IMPORT02","GLOBAL",100)
+END
+
+IF
+  HasItem("slng05","Container3")
+  HasItem("slng10","Container3")
+  !Global("L-IMPORT02","GLOBAL",8)
+THEN
+  RESPONSE #100
+    ActionOverride("Container3",DestroyItem("slng10"))
+END

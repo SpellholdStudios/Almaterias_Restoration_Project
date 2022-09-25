@@ -1,0 +1,7 @@
+IF
+HPLT(Myself,21)
+Global("DerilLich","GLOBAL",2)
+THEN
+	RESPONSE #100
+	StartDialogueNoSet(Player1)
+END

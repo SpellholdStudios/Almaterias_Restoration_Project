@@ -1,0 +1,41 @@
+IF
+	OnCreation()
+THEN
+	RESPONSE #100
+		CreateCreature("REBAND01",[488.558],10)
+		CreateCreature("REBAND02",[500.454],10)
+		CreateCreature("REBAND03",[552.476],10)
+		CreateCreature("REBAND04",[427.548],10)
+		CreateCreature("REBAND05",[525.591],10)
+		Continue()
+	RESPONSE #200
+		CreateCreature("REBAND01",[488.558],10)
+		CreateCreature("REBAND03",[488.558],10)
+		CreateCreature("REBAND02",[500.454],10)
+		CreateCreature("REBAND03",[552.476],10)
+		CreateCreature("REBAND05",[552.476],10)
+		CreateCreature("REBAND04",[427.548],10)
+		CreateCreature("REBAND05",[525.591],10)
+		Continue()
+	RESPONSE #300
+		CreateCreature("REBAND01",[488.558],10)
+		CreateCreature("REBAND02",[500.454],10)
+		CreateCreature("REBAND05",[500.454],10)
+		CreateCreature("REBAND03",[552.476],10)
+		CreateCreature("REBAND05",[552.476],10)
+		CreateCreature("REBAND04",[427.548],10)
+		CreateCreature("REBAND01",[427.548],10)
+		CreateCreature("REBAND05",[525.591],10)
+		Continue()
+	RESPONSE #500
+		CreateCreature("REBAND01",[488.558],10)
+		CreateCreature("REBAND02",[500.454],10)
+		CreateCreature("REBAND03",[500.454],10)
+		CreateCreature("REBAND01",[500.454],10)
+		CreateCreature("REBAND03",[552.476],10)
+		CreateCreature("REBAND04",[427.548],10)
+		CreateCreature("REBAND05",[427.548],10)
+		CreateCreature("REBAND05",[525.591],10)
+		CreateCreature("REBAND04",[525.591],10)
+		Continue()
+END

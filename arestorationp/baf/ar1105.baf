@@ -1,0 +1,8 @@
+IF
+	Global("BaronSpawn","AR1105",1)
+	Global("L-BaronSpawn","AR1105",0)
+THEN
+	RESPONSE #100
+		SetGlobal("L-BaronSpawn","AR1105",1)
+		CreateCreature("PLFARM03",[1015.213],0)
+END

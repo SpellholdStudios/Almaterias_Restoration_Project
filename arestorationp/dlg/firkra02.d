@@ -1,0 +1,2 @@
+ADD_TRANS_ACTION firkra02 BEGIN 25 END BEGIN END ~SetGlobal("L-FirkraagTaunt","GLOBAL",3)~
+ADD_TRANS_ACTION firkra02 BEGIN 21 END BEGIN END ~SetGlobal("L-FirkraagTaunt","GLOBAL",3)~

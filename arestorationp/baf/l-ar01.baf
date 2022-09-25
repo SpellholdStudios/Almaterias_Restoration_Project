@@ -1,0 +1,14 @@
+IF
+	OnCreation()
+	Global("L-SpawnBandints","GLOBAL",0)
+THEN
+	RESPONSE #100
+	CreateCreature("tobban01",[797.413],2)
+	CreateCreature("tobban02",[706.227],2)
+	CreateCreature("tobban02",[439.428],2)
+	CreateCreature("tobban03",[799.321],2)
+	CreateCreature("tobban03",[613.421],2)
+	CreateCreature("tobban04",[639.599],2)
+	CreateCreature("tobban04",[403.464],2)
+	SetGlobal("L-SpawnBandints","GLOBAL",1)
+END

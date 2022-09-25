@@ -1,0 +1,13 @@
+IF
+    OnCreation()
+    !GlobalGT("DMWWRandomBoring","GLOBAL",0)
+THEN
+    RESPONSE #100
+        IncrementGlobal("DMWWRandomBoring","GLOBAL",1)
+        CreateCreature("REBAND01",[488.558],10)
+        CreateCreature("REBAND02",[500.454],10)
+        CreateCreature("REBAND03",[552.476],10)
+        CreateCreature("REBAND04",[427.548],10)
+        CreateCreature("REBAND05",[525.591],10)
+        Continue()
+END

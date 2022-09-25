@@ -1,0 +1,3 @@
+ALTER_TRANS yagcon BEGIN 7 END BEGIN END
+BEGIN "ACTION" ~AddXP2DA("Plot11B")
+DestroyItem("chains")~ END

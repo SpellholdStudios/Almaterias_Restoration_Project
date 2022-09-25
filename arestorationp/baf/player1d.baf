@@ -1,0 +1,9 @@
+IF
+	GlobalTimerExpired("EllesimeDream2","GLOBAL")
+	Global("HadEllesimeDream2","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("HadEllesimeDream2","GLOBAL",1)
+		StartCutSceneMode()
+		StartCutScene("Cut70a")
+END

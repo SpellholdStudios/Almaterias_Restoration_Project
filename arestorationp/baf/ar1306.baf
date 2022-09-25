@@ -1,0 +1,8 @@
+IF
+Global("ThreatenedDaleson","GLOBAL",0)
+Global("L-SpawnedDaleson","GLOBAL",0)
+THEN
+RESPONSE #100
+CreateCreature("daleson",[478.1565],0)
+SetGlobal("L-SpawnedDaleson","GLOBAL",1)
+END

@@ -1,0 +1,1 @@
+REPLACE_STATE_TRIGGER hellfear 19 ~Global("Attacked","LOCALS",1)~

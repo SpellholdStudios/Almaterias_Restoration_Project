@@ -1,0 +1,2 @@
+REPLACE_STATE_TRIGGER udvamp01 0 ~Global("L-VampireUnstaked","AR2400",2)~ 
+ADD_TRANS_ACTION udvamp01 BEGIN 2 7 8 END BEGIN END ~Enemy()~

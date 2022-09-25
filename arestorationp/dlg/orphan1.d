@@ -1,0 +1,11 @@
+ALTER_TRANS orphan1 BEGIN 3 END BEGIN 1 END BEGIN "TRIGGER" ~OR(3)
+Class(LastTalkedToBy,CLERIC_ALL)
+Class(LastTalkedToBy,DRUID_ALL)
+Class(LastTalkedToBy,PALADIN_ALL)
+OR(5)
+Name("Jaheira",LastTalkedToBy)
+PartyHasItem("scrl63")
+HaveSpellParty(CLERIC_RAISE_DEAD)
+HaveSpellParty(CLERIC_RESURRECTION)
+HaveSpellParty(CLERIC_MASS_RAISE_DEAD)
+!Name("Keldorn",LastTalkedToBy)~ END

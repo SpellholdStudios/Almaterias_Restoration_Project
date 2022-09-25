@@ -1,0 +1,38 @@
+IF
+	Clicked([ANYONE])
+	Range(LastTrigger,9)
+	Global("L-VampireUnstaked","AR2400",0)
+THEN
+	RESPONSE #100
+		SetGlobal("L-VampireUnstaked","AR2400",1)
+		DisplayString(Myself,@201)
+END
+
+IF
+	Clicked([ANYONE])
+	Range(LastTrigger,9)
+	Global("L-VampireUnstaked","AR2400",1)
+THEN
+	RESPONSE #100
+			SetGlobal("L-VampireUnstaked","AR2400",2)
+			DisplayString(Myself,@202)
+			GiveItemCreate("misc6w",Player1,1,1,1)
+			PlaySound("EFF_M01")
+			CreateCreature("UDVAMP01",[1300.818],4)
+			CreateVisualEffectObject("SPPORTAL","UDVAMP01")
+			Wait(1)
+			PlaySound("EFF_P19")
+			CreateVisualEffectObject("SPSTRENH","UDVAMP01")
+			Wait(1)
+			ActionOverride("UDVAMP01",Wait(1))
+			ActionOverride("UDVAMP01",StartDialogNoSet(Player1))
+			TriggerActivation(Myself,FALSE)
+END
+
+IF
+	Clicked([ANYONE])
+	!Range(LastTrigger,9)
+THEN
+	RESPONSE #100
+		DisplayString(Myself,#14702)
+END

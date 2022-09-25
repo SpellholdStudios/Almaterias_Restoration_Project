@@ -1,0 +1,1 @@
+ADD_STATE_TRIGGER aewimer1 0 ~NumTimesTalkedTo(0)~

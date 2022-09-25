@@ -1,0 +1,8 @@
+IF
+	Global("SpawnNaliaFuneral","AR0800",1)
+	Global("L-SpawnNalFal","AR0800",0)
+THEN
+	RESPONSE #100
+		SetGlobal("L-SpawnNalFal","AR0800",1)
+		CreateCreature("NALFAL",[1583.779],0)
+END

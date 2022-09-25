@@ -1,0 +1,9 @@
+IF
+Global("PlayTextScreen","AR5203",1)
+Global("RevealRuinedSaradush","GLOBAL",0)
+THEN
+RESPONSE #100
+RevealAreaOnMap("L-SAR1")
+HideAreaOnMap("AR5000")
+SetGlobal("RevealRuinedSaradush","GLOBAL",1)
+END

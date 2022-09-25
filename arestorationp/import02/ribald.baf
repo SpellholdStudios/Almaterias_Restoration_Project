@@ -1,0 +1,9 @@
+IF
+  HasItem("sw1h06",Myself)
+  Global("L-IMPORT02","GLOBAL",9)
+THEN
+  RESPONSE #100
+    DestroyItem("sw1h06")
+		CreateItem("sw1h41",0,0,0)
+    SetGlobal("L-IMPORT02","GLOBAL",100)
+END

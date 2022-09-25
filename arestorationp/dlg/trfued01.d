@@ -1,0 +1,1 @@
+REPLACE_TRANS_TRIGGER trfued01 BEGIN 15 END BEGIN 1 END ~False()~ ~True()~

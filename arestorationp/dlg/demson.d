@@ -1,0 +1,35 @@
+ALTER_TRANS DEMSON BEGIN 47 END BEGIN 0 END BEGIN "TRIGGER" ~Global("PaladinPlot","GLOBAL",9)
+!Dead("plmetr01")
+!Dead("plfarm04")
+!Dead("plfarm05")
+!Dead("plfarm06")~ END
+ALTER_TRANS DEMSON BEGIN 47 END BEGIN 1 END BEGIN "TRIGGER" ~Global("PaladinPlot","GLOBAL",10)
+Global("BaronExposed","GLOBAL",0)
+!Dead("plmetr01")
+!Dead("plfarm04")
+!Dead("plfarm05")
+!Dead("plfarm06")~ END
+ALTER_TRANS DEMSON BEGIN 47 END BEGIN 2 END BEGIN "TRIGGER" ~Global("PaladinPlot","GLOBAL",10)
+OR(2)
+Global("BaronExposed","GLOBAL",1)
+Global("BaronExposed","GLOBAL",2)
+!Dead("plmetr01")
+!Dead("plfarm04")
+!Dead("plfarm05")
+!Dead("plfarm06")~ END
+ALTER_TRANS DEMSON BEGIN 47 END BEGIN 3 END BEGIN "TRIGGER" ~Global("PaladinPlot","GLOBAL",11)
+OR(3)
+Dead("plfarm04")
+Dead("plfarm05")
+Dead("plfarm06")
+!Dead("plmetr01")~ END
+ALTER_TRANS DEMSON BEGIN 47 END BEGIN 4 END BEGIN "TRIGGER" ~Global("PaladinPlot","GLOBAL",12)
+Dead("plmetr01")
+!Dead("plfarm04")
+!Dead("plfarm05")
+!Dead("plfarm06")~ END
+ALTER_TRANS DEMSON BEGIN 47 END BEGIN 5 END BEGIN "TRIGGER" ~Dead("plmetr01")
+OR(3)
+Dead("plfarm04")
+Dead("plfarm05")
+Dead("plfarm06")~ END

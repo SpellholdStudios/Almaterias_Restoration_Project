@@ -1,0 +1,15 @@
+IF
+	NumTimesTalkedTo(0)
+	Detect([PC])
+THEN
+	RESPONSE #100
+		StartDialogueNoSet([PC])
+END
+
+IF
+	NumTimesTalkedTo(1)
+	Detect([PC])
+THEN
+	RESPONSE #100
+		StartDialogueNoSet([PC])
+END

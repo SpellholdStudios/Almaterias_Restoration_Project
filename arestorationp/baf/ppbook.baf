@@ -1,0 +1,13 @@
+IF
+Clicked([ANYONE])
+Global("toggle","AR1513",1)
+Global("page","AR1513",5)
+THEN
+RESPONSE #100
+DisplayString(Myself,50657)
+CreateVisualEffect("SPPLANAR",[2196.634])
+Wait(2)
+CreateCreature("GOLADA01",[2196.634],10)
+IncrementGlobal("page","AR1513",1)
+SetGlobal("toggle","AR1513",0)
+END

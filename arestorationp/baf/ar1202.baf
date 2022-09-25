@@ -1,0 +1,16 @@
+IF
+Global("L-FirkraagTaunt","GLOBAL",0)
+THEN
+RESPONSE #100
+CreateCreature("firkra03",[1717.2290],0)
+SetGlobal("L-FirkraagTaunt","GLOBAL",1)
+END
+
+IF
+!Dead("firkra02")
+Global("L-FirkraagTaunt","GLOBAL",3)
+THEN
+RESPONSE #100
+CreateCreature("firkra03",[1853.420],0)
+SetGlobal("L-FirkraagTaunt","GLOBAL",4)
+END

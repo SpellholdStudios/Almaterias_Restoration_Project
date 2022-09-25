@@ -1,0 +1,10 @@
+IF
+	OnCreation()
+THEN
+	RESPONSE #100
+		CreateCreature("REBAND01",[488.558],NE)
+		CreateCreature("REBAND02",[500.454],NE)
+		CreateCreature("REBAND03",[552.476],NE)
+		CreateCreature("REBAND04",[427.548],NE)
+		CreateCreature("REBAND05",[525.591],NE)
+END

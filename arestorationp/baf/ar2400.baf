@@ -1,0 +1,15 @@
+IF
+	Global("L-SpawnVampire","GLOBAL",0)
+THEN
+	RESPONSE #100
+		CreateCreatureImpassable("udvadead",[1362.813],0)
+		SetGlobal("L-SpawnVampire","GLOBAL",1)
+END
+
+IF
+	Global("L-VampireUnstaked","AR2400",2)
+THEN
+	RESPONSE #100
+		SetGlobal("L-SpawnVampire","GLOBAL",2)
+		ActionOverride("udvadead",DestroySelf())
+END

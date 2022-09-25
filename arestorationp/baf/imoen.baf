@@ -1,0 +1,16 @@
+IF
+Detect(Player1)
+Global("L-ImoenLightning","AR0602",1)
+THEN
+RESPONSE #100
+SetGlobal("L-ImoenLightning","AR0602",2)
+StartDialogueNoSet(Player1)
+END
+
+IF
+!Detect(Player1)
+Global("L-ImoenLightning","AR0602",1)
+THEN
+RESPONSE #100
+SetGlobal("L-ImoenLightning","AR0602",3)
+END

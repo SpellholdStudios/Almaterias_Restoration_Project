@@ -1,0 +1,15 @@
+IF
+Dead("OBSSAH01")
+NumDead("OBSSAH02",2)
+NumDead("OBSSAH03",2)
+Dead("OBSSAH04")
+Dead("OBSSAH05")
+Global("L-SahUnlock","AR0411",0)
+THEN
+RESPONSE #100
+DisplayStringHead(Player1,50057)
+Wait(5)
+OpenDoor("DoorSoldier1")
+Unlock("DoorSoldier1")
+SetGlobal("L-SahUnlock","AR0411",1)
+END

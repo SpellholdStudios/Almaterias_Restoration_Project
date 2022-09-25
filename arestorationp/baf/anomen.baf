@@ -1,0 +1,13 @@
+IF
+	InParty(Myself)
+	GlobalTimerExpired("ddKidnapTimer","GLOBAL")
+	Global("L-AnomenWhine","LOCALS",0)
+	!Dead("garkid01")
+	!Dead("garkid02")
+	!GlobalGT("Kidnap","GLOBAL",3)
+THEN
+	RESPONSE #100
+		SetGlobal("L-AnomenWhine","LOCALS",1)
+		StartDialogueNoSet(Player1)
+		SetGlobalTimer("ddKidnapTimer","GLOBAL",THREE_DAYS)
+END

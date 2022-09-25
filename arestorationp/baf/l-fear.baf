@@ -1,0 +1,8 @@
+IF
+	AttackedBy([PC],DEFAULT)
+	Global("Attacked","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetGlobal("Attacked","LOCALS",1)
+		StartDialogueNoSet(Player1)
+END

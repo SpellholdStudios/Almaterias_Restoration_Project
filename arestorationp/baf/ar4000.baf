@@ -1,0 +1,7 @@
+IF
+	OnCreation()
+THEN
+	RESPONSE #100
+		SetGlobal("MasteredTheSlayer","GLOBAL",1)
+		Continue()
+END

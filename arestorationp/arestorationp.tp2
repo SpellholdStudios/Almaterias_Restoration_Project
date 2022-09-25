@@ -1,0 +1,2691 @@
+BACKUP ~arestorationp/backup~
+AUTHOR ~Almateria (bukato@icloud.com)~
+VERSION ~v8.4~
+README "arestorationp/language/%LANGUAGE%/readme.html" "arestorationp/language/english/readme.html"
+AUTO_TRA ~arestorationp/language/%s~
+//%
+
+ALWAYS
+  ACTION_IF GAME_IS ~eet~ BEGIN
+    OUTER_SET bg2_chapter = 12
+    OUTER_SET wmp_xCoordAdd_SoA = 0
+    OUTER_SET wmp_yCoordAdd_SoA = 2283
+    OUTER_SET wmp_xCoordAdd_ToB = 893
+    OUTER_SET wmp_yCoordAdd_ToB = 3011
+    OUTER_SPRINT wmp_name_ToB "worldmap"
+  END ELSE BEGIN
+    OUTER_SET bg2_chapter = 0
+    OUTER_SET wmp_xCoordAdd_SoA = 0
+    OUTER_SET wmp_yCoordAdd_SoA = 0
+    OUTER_SET wmp_xCoordAdd_ToB = 0
+    OUTER_SET wmp_yCoordAdd_ToB = 0
+    OUTER_SPRINT wmp_name_ToB "worldm25"
+  END
+  OUTER_FOR (i=1; i<=10; i=i+1) BEGIN
+    OUTER_SET bg2_chapter = bg2_chapter + 1
+    OUTER_SPRINT name_source ~bg2_chapter_%i%~
+    OUTER_SET EVAL ~%name_source%~ = bg2_chapter
+  END
+  OUTER_SPRINT tra_path ~%MOD_FOLDER%/language~
+  ACTION_DEFINE_ARRAY l-noconvert BEGIN setup setup-osx setup-unix setup-win32 END
+  ACTION_DEFINE_ARRAY l-reload BEGIN game END
+  ACTION_DEFINE_ASSOCIATIVE_ARRAY charset_table BEGIN
+    english => cp1252
+    italian => cp1252
+    dutch => cp1252
+    latin => cp1252
+    faroese => cp1252
+    polish => cp1250
+    schinese => cp936
+    french => cp1252
+		german => cp1252
+		ptbr => cp1252
+  END
+  LAF HANDLE_CHARSETS
+    INT_VAR
+      infer_charset = 0
+    STR_VAR
+      tra_path = EVAL ~%MOD_FOLDER%/language~
+      noconvert_array = l-noconvert
+      reload_array = l-reload
+	  charset_table = charset_table
+      default_language = ~english~
+  END
+END
+
+LANGUAGE ~Polski~
+		 ~polish~
+         ~arestorationp/language/english/game.tra~
+         ~arestorationp/language/english/setup.tra~
+         ~arestorationp/language/polish/game.tra~
+         ~arestorationp/language/polish/setup-%WEIDU_OS%.tra~
+LANGUAGE ~English~
+		 ~english~
+		 ~arestorationp/language/english/game.tra~
+		 ~arestorationp/language/english/setup-%WEIDU_OS%.tra~
+LANGUAGE ~Italiano (by Sergio)~
+		 ~italian~
+         ~arestorationp/language/english/game.tra~
+         ~arestorationp/language/english/setup.tra~
+         ~arestorationp/language/italian/game.tra~
+         ~arestorationp/language/italian/setup-%WEIDU_OS%.tra~
+LANGUAGE ~Nederlands (by Tzarnal)~
+		 ~dutch~
+         ~arestorationp/language/english/game.tra~
+         ~arestorationp/language/english/setup.tra~
+         ~arestorationp/language/dutch/game.tra~
+         ~arestorationp/language/dutch/setup-%WEIDU_OS%.tra~
+LANGUAGE ~lingua latina (by Sleep of Bronze)~
+		 ~latin~
+         ~arestorationp/language/english/game.tra~
+         ~arestorationp/language/english/setup.tra~
+         ~arestorationp/language/latin/game.tra~
+         ~arestorationp/language/latin/setup-%WEIDU_OS%.tra~
+LANGUAGE ~Foeroyskr (BG2EE) (by inscrutable horse)~
+		 ~faroese~
+         ~arestorationp/language/english/game.tra~
+         ~arestorationp/language/english/setup.tra~
+         ~arestorationp/language/faroese/game.tra~
+         ~arestorationp/language/faroese/setup-%WEIDU_OS%.tra~
+LANGUAGE ~Simplified Chinese (by Sebastian C)~
+		 ~schinese~
+         ~arestorationp/language/english/game.tra~
+         ~arestorationp/language/english/setup.tra~
+         ~arestorationp/language/schinese/game.tra~
+         ~arestorationp/language/schinese/setup-%WEIDU_OS%.tra~
+LANGUAGE ~Francais (by Isaya and the d'Oghmatiques)~
+		 ~french~
+         ~arestorationp/language/english/game.tra~
+         ~arestorationp/language/english/setup.tra~
+         ~arestorationp/language/french/game.tra~
+         ~arestorationp/language/french/setup-%WEIDU_OS%.tra~
+LANGUAGE ~Deutsch (by Dachrisma)~
+		 ~german~
+         ~arestorationp/language/english/game.tra~
+         ~arestorationp/language/english/setup.tra~
+         ~arestorationp/language/german/game.tra~
+         ~arestorationp/language/german/setup.tra~
+LANGUAGE ~Portugues brasileiro (by Felipe)~
+		 ~ptbr~
+         ~arestorationp/language/english/game.tra~
+         ~arestorationp/language/english/setup.tra~
+         ~arestorationp/language/ptbr/game.tra~
+         ~arestorationp/language/ptbr/setup.tra~
+
+BEGIN @100
+ACTION_IF FILE_EXISTS_IN_GAME ~clck28.itm~ BEGIN
+COPY_EXISTING ~clck28.itm~ ~override/l-clck.itm~
+END
+
+COPY_EXISTING ~AR0307.ARE~ ~override~
+	SET ~container_to_add_to~ = 10
+	SPRINT ~item_to_add~ ~CLCK01~
+	SET ~charges1~ = 0
+	SET ~charges2~ = 0
+	SET ~charges3~ = 0
+	LPM ~ADD_AREA_ITEM~
+	BUT_ONLY
+
+COPY_EXISTING ~AR0307.ARE~ ~override~
+	SET ~container_to_add_to~ = 10
+	SPRINT ~item_to_add~ ~CLCK12~
+	SET ~charges1~ = 0
+	SET ~charges2~ = 0
+	SET ~charges3~ = 0
+	LPM ~ADD_AREA_ITEM~
+	BUT_ONLY
+
+OUTER_FOR (x = 0; x < 10; x += 1) BEGIN
+
+COPY_EXISTING ~AR0307.ARE~ ~override~
+	SET ~container_to_add_to~ = 10
+	SPRINT ~item_to_add~ ~L-CLCK~
+	SET ~charges1~ = 0
+	SET ~charges2~ = 0
+	SET ~charges3~ = 0
+	LPM ~ADD_AREA_ITEM~
+	BUT_ONLY
+END
+
+COPY_EXISTING ~AR0307.ARE~ ~override~
+	SET ~container_to_add_to~ = 11
+	SPRINT ~item_to_add~ ~CLCK01~
+	SET ~charges1~ = 0
+	SET ~charges2~ = 0
+	SET ~charges3~ = 0
+	LPM ~ADD_AREA_ITEM~
+	BUT_ONLY
+
+COPY_EXISTING ~AR0307.ARE~ ~override~
+	SET ~container_to_add_to~ = 11
+	SPRINT ~item_to_add~ ~CLCK12~
+	SET ~charges1~ = 0
+	SET ~charges2~ = 0
+	SET ~charges3~ = 0
+	LPM ~ADD_AREA_ITEM~
+	BUT_ONLY
+
+OUTER_FOR (x = 0; x < 10; x += 1) BEGIN
+
+COPY_EXISTING ~AR0307.ARE~ ~override~
+	SET ~container_to_add_to~ = 11
+	SPRINT ~item_to_add~ ~L-CLCK~
+	SET ~charges1~ = 0
+	SET ~charges2~ = 0
+	SET ~charges3~ = 0
+	LPM ~ADD_AREA_ITEM~
+	BUT_ONLY
+END
+
+COPY_EXISTING ~ar2000.are~ ~override~
+	LPF fj_are_structure
+		INT_VAR
+    fj_loc_x       = 3132
+    fj_loc_y       = 2870
+    fj_orientation = 12
+		STR_VAR
+    fj_structure_type = entrance
+    fj_name           = Exit2018
+END
+
+COPY_EXISTING ~ar2000.are~ ~override~
+	LPF fj_are_structure
+		INT_VAR
+	fj_type         = 2
+	fj_box_left     = 3046
+	fj_box_top      = 2813
+	fj_box_right    = 3113
+	fj_box_bottom   = 2874
+	fj_cursor_idx   = 30
+	fj_vertex_0     = 3046 + (2813 << 16)
+	fj_vertex_1     = 3113 + (2813 << 16)
+	fj_vertex_2     = 3113 + (2874 << 16)
+	fj_vertex_3     = 3046 + (2874 << 16)
+		STR_VAR
+	fj_structure_type   = region
+	fj_name             = Tran2018
+	fj_destination_area = ar2018
+	fj_destination_name = Exit2000
+END
+
+COPY_EXISTING ~ar2018.are~ ~override~
+	LPF fj_are_structure
+		INT_VAR
+    fj_loc_x       = 375
+    fj_loc_y       = 460
+    fj_orientation = 8
+		STR_VAR
+    fj_structure_type = entrance
+    fj_name           = Exit2000
+END
+
+COPY_EXISTING ~ar2018.are~ ~override~
+	LPF fj_are_structure
+		INT_VAR
+	fj_type         = 2
+	fj_box_left     = 266
+	fj_box_top      = 471
+	fj_box_right    = 449
+	fj_box_bottom   = 590
+	fj_cursor_idx   = 30
+	fj_vertex_0     = 266 + (480 << 16)
+	fj_vertex_1     = 449 + (490 << 16)
+	fj_vertex_2     = 449 + (590 << 16)
+	fj_vertex_3     = 266 + (560 << 16)
+		STR_VAR
+	fj_structure_type   = region
+	fj_name             = Tran2000
+	fj_destination_area = ar2000
+	fj_destination_name = Exit2018
+END
+
+COPY_EXISTING ~AR2018.are~ ~override~
+	WRITE_ASCII 0x0094 ~AR2018~ #8
+
+COPY_EXISTING ~ar5008.are~ ~override~
+	LPF fj_are_structure
+		INT_VAR
+    fj_loc_x       = 886
+    fj_loc_y       = 782
+    fj_orientation = 8
+		STR_VAR
+    fj_structure_type = entrance
+    fj_name           = Exit5009
+END
+
+COPY_EXISTING ~ar5008.are~ ~override~
+	LPF fj_are_structure
+		INT_VAR
+	fj_type         = 2
+	fj_box_left     = 890
+	fj_box_top      = 765
+	fj_box_right    = 1020
+	fj_box_bottom   = 869
+	fj_cursor_idx   = 28
+	fj_vertex_0     = 890 + (831 << 16)
+	fj_vertex_1     = 980 + (765 << 16)
+	fj_vertex_2     = 1020 + (793 << 16)
+	fj_vertex_3     = 990 + (869 << 16)
+		STR_VAR
+	fj_structure_type   = region
+	fj_name             = Tran5009
+	fj_destination_area = ar5009
+	fj_destination_name = Exit5008
+END
+
+COPY_EXISTING ~ar5009.are~ ~override~
+	WRITE_ASCII 0x0094 ~~ #8
+
+COPY_EXISTING ~ar5204.are~ override
+LPF fj_are_structure
+INT_VAR
+fj_type = 1
+fj_box_left     = 1160
+fj_box_top      = 1535
+fj_box_right    = 1520
+fj_box_bottom   = 1914
+fj_vertex_0     = 1180 + (1535 << 16)
+fj_vertex_1     = 1215 + (1547 << 16)
+fj_vertex_2     = 1284 + (1571 << 16)
+fj_vertex_3     = 1387 + (1619 << 16)
+fj_vertex_4     = 1469 + (1672 << 16)
+fj_vertex_5     = 1507 + (1697 << 16)
+fj_vertex_6     = 1520 + (1752 << 16)
+fj_vertex_7     = 1520 + (1914 << 16)
+fj_vertex_8     = 1160 + (1752 << 16)
+fj_vertex_9     = 1160 + (1547 << 16)
+fj_cursor_idx   = 30
+fj_trap_active = 1
+fj_trap_status = 0
+fj_trap_detect = 0
+fj_trap_remove = 0
+fj_loc_x = 1316
+fj_loc_y = 1725
+fj_alt_x = 1271
+fj_alt_y = 1841
+fj_flags = 0x00000400
+STR_VAR
+fj_structure_type = region
+fj_name = MainEntrance
+fj_reg_script = ittemple
+END
+
+COPY_EXISTING ~ppbook.BCS~ ~override~
+  DECOMPILE_AND_PATCH BEGIN
+    REPLACE_TEXTUALLY EXACT_MATCH ~Global("page","AR1513",5)~
+                      ~Global("page","AR1513",6)~
+  END
+  BUT_ONLY
+EXTEND_BOTTOM ~ppbook.bcs~ ~arestorationp/baf/ppbook.baf~
+
+COPY_EXISTING ~obssahtp.BCS~ ~override~
+  DECOMPILE_AND_PATCH BEGIN
+  REPLACE_TEXTUALLY ~\(CreateCreature("OBSSAH05",.+)\)~
+                      ~\1
+                       CloseDoor("DoorSoldier1")
+                       Lock("DoorSoldier1")~
+  END
+  BUT_ONLY
+
+COPY_EXISTING ~obssah01.cre~ override
+WRITE_ASCII 0x280 ~obssah01~ #32
+COPY_EXISTING ~obssah02.cre~ override
+WRITE_ASCII 0x280 ~obssah02~ #32
+COPY_EXISTING ~obssah03.cre~ override
+WRITE_ASCII 0x280 ~obssah03~ #32
+COPY_EXISTING ~obssah04.cre~ override
+WRITE_ASCII 0x280 ~obssah04~ #32
+COPY_EXISTING ~obssah05.cre~ override
+WRITE_ASCII 0x280 ~obssah05~ #32
+EXTEND_TOP ~ar0411.bcs~ ~arestorationp/baf/ar0411a.baf~
+
+COPY_EXISTING ~ar3017.are~ override
+LPF fj_are_structure
+INT_VAR
+fj_type = 1
+fj_box_left = 2264
+fj_box_top = 2420
+fj_box_right = 2594
+fj_box_bottom = 2662
+fj_cursor_idx = 22
+fj_vertex_0     = 2264 + (2438 << 16)
+fj_vertex_1     = 2330 + (2420 << 16)
+fj_vertex_2     = 2594 + (2609 << 16)
+fj_vertex_3     = 2564 + (2662 << 16)
+fj_info_point_strref = 63234
+fj_trap_active = 1
+STR_VAR
+fj_name = L-TILE1
+fj_structure_type = region
+END
+COPY_EXISTING ~ar3017.are~ override
+LPF fj_are_structure
+INT_VAR
+fj_type = 1
+fj_box_left = 3837
+fj_box_top = 1324
+fj_box_right = 4165
+fj_box_bottom = 1568
+fj_cursor_idx = 22
+fj_vertex_0     = 3837 + (1387 << 16)
+fj_vertex_1     = 3882 + (1324 << 16)
+fj_vertex_2     = 4165 + (1530 << 16)
+fj_vertex_3     = 4088 + (1568 << 16)
+fj_info_point_strref = 63234
+fj_trap_active = 1
+STR_VAR
+fj_name = L-TILE2
+fj_structure_type = region
+END
+EXTEND_BOTTOM ~ar3017.bcs~ ~arestorationp/baf/ar3017.baf~
+
+COPY_EXISTING ~cut41f.BCS~ ~override~
+    DECOMPILE_AND_PATCH BEGIN
+    REPLACE_TEXTUALLY EXACT_MATCH ~SetGlobal("AsylumPlot","GLOBAL",12)~
+                      ~SetGlobal("AsylumPlot","GLOBAL",12)
+					  TextScreen("scrtxt04")~
+  END
+  BUT_ONLY
+ COPY_EXISTING ~scrtxt04.2da~ override
+ SET_2DA_ENTRY 4 1 1 ~57351~
+
+COPY_EXISTING ~ar2807.bcs~ override
+DECOMPILE_AND_PATCH BEGIN
+REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~FadeFromColor([20.0],0)~ ~FadeFromColor([20.0],0)
+DisplayStringHead(Player1,57967)~
+END
+
+BEGIN @200
+COMPILE ~arestorationp/dlg/mage2.d~
+COPY_EXISTING ~cuwiz1.cre~ ~override/l-mage01.cre~
+WRITE_ASCII 0x0250 ~mage18c~ #8
+WRITE_ASCII 0x0280 ~l-mage01~ #32
+WRITE_ASCII 0x02cc ~mage1~ #8
+COPY_EXISTING ~cuwiz1.cre~ ~override/l-mage02.cre~
+WRITE_ASCII 0x0250 ~mage18c~ #8
+WRITE_ASCII 0x0280 ~l-mage02~ #32
+WRITE_ASCII 0x02cc ~mage2~ #8
+COPY_EXISTING ~AR1002.are~ ~override~
+      LPF fj_are_structure
+        INT_VAR
+        fj_loc_x          = 203
+        fj_loc_y          = 677
+        fj_dest_loc_x     = 203
+        fj_dest_loc_y     = 677
+        fj_animation      = 0x6402
+        fj_orientation    = 0
+        STR_VAR
+        fj_structure_type = actor
+        fj_name           = ~Cowled Wizard 1~
+        fj_cre_resref     = l-mage01
+      END
+COPY_EXISTING ~AR1002.are~ ~override~
+      LPF fj_are_structure
+        INT_VAR
+        fj_loc_x          = 682
+        fj_loc_y          = 330
+        fj_dest_loc_x     = 682
+        fj_dest_loc_y     = 330
+        fj_animation      = 0x6402
+        fj_orientation    = 0
+        STR_VAR
+        fj_structure_type = actor
+        fj_name           = ~Cowled Wizard 2~
+        fj_cre_resref     = l-mage02
+      END
+
+COPY_EXISTING ~ar2018.are~ override
+      LPF fj_are_structure
+        INT_VAR
+        fj_loc_x          = 370
+        fj_loc_y          = 351
+        fj_dest_loc_x     = 370
+        fj_dest_loc_y     = 351
+        fj_animation      = 0xc910
+        fj_orientation    = 13
+        STR_VAR
+        fj_structure_type = actor
+        fj_name           = ~Becky~
+        fj_cre_resref     = becky
+      END
+COPY_EXISTING ~ar2018.are~ override
+      LPF fj_are_structure
+        INT_VAR
+        fj_loc_x          = 425
+        fj_loc_y          = 342
+        fj_dest_loc_x     = 425
+        fj_dest_loc_y     = 342
+        fj_animation      = 0xc910
+        fj_orientation    = 1
+        STR_VAR
+        fj_structure_type = actor
+        fj_name           = ~Diane~
+        fj_cre_resref     = diane
+      END
+
+COPY_EXISTING ~ar2202.are~ override
+      LPF fj_are_structure
+        INT_VAR
+        fj_loc_x          = 631
+        fj_loc_y          = 594
+        fj_dest_loc_x     = 3450
+        fj_dest_loc_y     = 636
+        fj_animation      = 0x6101
+        fj_orientation    = 7
+        STR_VAR
+        fj_structure_type = actor
+        fj_name           = ~Drow Cook~
+        fj_cre_resref     = uddrow05
+      END
+
+COPY_EXISTING ~ar1600.are~ override
+      LPF fj_are_structure
+        INT_VAR
+        fj_loc_x          = 2666
+        fj_loc_y          = 1263
+        fj_dest_loc_x     = 2666
+        fj_dest_loc_y     = 1263
+        fj_animation      = 0x6100
+        fj_orientation    = 2
+        STR_VAR
+        fj_structure_type = actor
+        fj_name           = ~Guardsman~
+        fj_cre_resref     = pirgrd01
+      END
+COPY_EXISTING ~ar1600.are~ override
+      LPF fj_are_structure
+        INT_VAR
+        fj_loc_x          = 2626
+        fj_loc_y          = 1278
+        fj_dest_loc_x     = 2626
+        fj_dest_loc_y     = 1278
+        fj_animation      = 0x6100
+        fj_orientation    = 2
+        STR_VAR
+        fj_structure_type = actor
+        fj_name           = ~Privateer~
+        fj_cre_resref     = pirprv01
+      END
+
+EXTEND_BOTTOM ~ar0800.bcs~ ~arestorationp/baf/ar0800.baf~
+COMPILE ~arestorationp/dlg/nalfal.d~
+COPY_EXISTING ~gnoblem2.cre~ ~override/nalfal.cre~
+WRITE_ASCII 0x0258 ~NALIAFUN~ #8
+WRITE_ASCII 0x0280 ~NALFAL~ #32
+WRITE_ASCII 0x02cc ~NALFAL~ #8
+
+COPY_EXISTING ~ar0808.bcs~ override
+DECOMPILE_AND_PATCH BEGIN
+REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~SetGlobal("PaladinSpawn","AR0808",1)~
+~SetGlobal("PaladinSpawn","AR0808",1)
+CreateCreature("c6kalden",[800.1863],8)
+CreateCreature("c6levin",[777.1762],8)~
+REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~OpenDoor("DOOR03")~
+~OpenDoor("DOOR03")
+CreateCreature("c6alyra",[1419.1161],2)
+CreateCreature("c6natas",[1499.1182],2)~
+END
+COPY_EXISTING ~c6kalden.cre~ override
+WRITE_ASCII 0x2cc ~C6GEN~ #8
+WRITE_ASCII 0x248 ~C6PALADN~ #8
+COPY_EXISTING ~c6levin.cre~ override
+WRITE_ASCII 0x2cc ~C6GEN~ #8
+WRITE_ASCII 0x248 ~C6PALADN~ #8
+COPY_EXISTING ~c6alyra.cre~ override
+WRITE_ASCII 0x2cc ~C6GEN~ #8
+WRITE_ASCII 0x248 ~C6THIEF~ #8
+ADD_CRE_ITEM ~LEAT11~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~ EQUIP
+ADD_CRE_ITEM ~SW1H09~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+COPY_EXISTING ~c6natas.cre~ override
+WRITE_ASCII 0x2cc ~C6GEN~ #8
+WRITE_ASCII 0x248 ~C6THIEF~ #8
+ADD_CRE_ITEM ~LEAT11~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~ EQUIP
+ADD_CRE_ITEM ~SW1H09~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+
+COPY_EXISTING ~plfarm03.cre~ override
+WRITE_ASCII 0x248 ~GENSHT01~ #8
+WRITE_ASCII 0x268 ~WTASIGHT~ #8
+EXTEND_BOTTOM ~ar1105.bcs~ ~arestorationp/baf/ar1105.baf~
+COMPILE ~arestorationp/dlg/plmetr01.d~
+COMPILE ~arestorationp/dlg/plfarm03.d~
+COMPILE ~arestorationp/dlg/demson.d~
+
+COPY_EXISTING ~suziyaad.cre~ override
+WRITE_BYTE 0x270 255
+ADD_CRE_ITEM ~RAKRING~ #0 #0 #0 ~UNDROPPABLE~ ~LRING~ EQUIP
+ADD_CRE_ITEM ~SW1H04~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+COPY_EXISTING ~ar2809.are~ override
+      LPF fj_are_structure
+        INT_VAR
+        fj_loc_x          = 411
+        fj_loc_y          = 375
+        fj_dest_loc_x     = 411
+        fj_dest_loc_y     = 375
+        fj_animation      = 0x7f10
+        fj_orientation    = 0
+        STR_VAR
+        fj_structure_type = actor
+        fj_name           = ~Ziyaad~
+        fj_cre_resref     = suziyaad
+      END
+
+COPY_EXISTING ~breg03.cre~ override
+WRITE_BYTE 0x0270 128
+COPY_EXISTING ~breg03.cre~ ~override/l-breg3.cre~
+WRITE_ASCII 0x280 ~L-BREG3~ #32
+COMPILE ~arestorationp/dlg/JARLAXLE.d~
+COPY_EXISTING ~ar2208.are~ override
+      LPF fj_are_structure
+        INT_VAR
+        fj_loc_x          = 150
+        fj_loc_y          = 480
+        fj_dest_loc_x     = 150
+        fj_dest_loc_y     = 480
+        fj_animation      = 0x6101
+        fj_orientation    = 10
+        STR_VAR
+        fj_structure_type = actor
+        fj_name           = ~D'aerthe Guard~
+        fj_cre_resref     = breg03
+      END
+COPY_EXISTING ~ar2208.are~ override
+      LPF fj_are_structure
+        INT_VAR
+        fj_loc_x          = 350
+        fj_loc_y          = 630
+        fj_dest_loc_x     = 350
+        fj_dest_loc_y     = 630
+        fj_animation      = 0x6101
+        fj_orientation    = 10
+        STR_VAR
+        fj_structure_type = actor
+        fj_name           = ~D'aerthe Guard~
+        fj_cre_resref     = l-breg3
+      END
+
+COMPILE ~arestorationp/dlg/jarlich.d~
+COPY_EXISTING ~jarlich.cre~ override
+WRITE_ASCII 0x248 ~L-JARLI~ #8
+COMPILE ~arestorationp/baf/l-jarli.baf~
+
+COMPILE ~arestorationp/baf/udvamp01.baf~
+COMPILE ~arestorationp/dlg/udvamp01.d~
+COPY_EXISTING ~vampim01.cre~ ~override/udvamp01.cre~
+WRITE_ASCII 0x0280 ~UDVAMP01~ #32
+WRITE_ASCII 0x02cc ~UDVAMP01~ #8
+WRITE_BYTE 0x0270 128
+COPY_EXISTING ~vampim01.cre~ ~override/udvadead.cre~
+WRITE_LONG 0x0020 0x00000800
+WRITE_ASCII 0x0280 ~UDVADEAD~ #32
+COPY_EXISTING ~ar2400.are~ ~override~
+	LPF fj_are_structure
+		INT_VAR
+	fj_type         = 1
+	fj_box_left     = 1290
+	fj_box_top      = 776
+	fj_box_right    = 1390
+	fj_box_bottom   = 852
+	fj_cursor_idx   = 8
+	fj_vertex_0     = 1316 + (852 << 16)
+	fj_vertex_1     = 1390 + (852 << 16)
+	fj_vertex_2     = 1390 + (776 << 16)
+	fj_vertex_3     = 1316 + (776 << 16)
+		STR_VAR
+	fj_structure_type   = region
+	fj_name             = Vampire
+	fj_reg_script		= UDVAMP01
+END
+EXTEND_BOTTOM ~ar2400.bcs~ ~arestorationp/baf/ar2400.baf~
+
+COMPILE ~arestorationp/baf/ar0326.baf~
+
+COMPILE ~arestorationp/dlg/pelanna.d~
+COPY_EXISTING pelanna.dlg override
+WRITE_LONG 0X30 1
+
+COMPILE ~arestorationp/dlg/trfued01.d~
+COMPILE ~arestorationp/dlg/trfued05.d~
+
+COMPILE ~arestorationp/dlg/c6gener.d~
+
+COMPILE ~arestorationp/dlg/heartg5.d~
+
+EXTEND_BOTTOM ~viconia.bcs~ ~arestorationp/baf/viconia.baf~ EVALUATE_BUFFER
+COMPILE ~arestorationp/dlg/bviconi.d~
+EXTEND_TOP ~ar0411.bcs~ ~arestorationp/baf/ar0411b.baf~
+
+COPY_EXISTING ~obsdem02.cre~ override
+WRITE_ASCII 0x280 ~OBSDEM02~ #32
+COMPILE ~arestorationp/baf/mane01.baf~
+COPY_EXISTING ~ar0414.are~ override
+      LPF fj_are_structure
+        INT_VAR
+        fj_loc_x          = 2948
+        fj_loc_y          = 1328
+        fj_dest_loc_x     = 2958
+        fj_dest_loc_y     = 1328
+        fj_animation      = 0x7700
+        fj_orientation    = 0
+        STR_VAR
+        fj_structure_type = actor
+        fj_name           = ~Mane~
+        fj_cre_resref     = obsdem02
+      END
+COPY_EXISTING ~spin917.spl~ override
+LPF ALTER_SPELL_EFFECT
+INT_VAR
+match_opcode = 12
+target = 2
+END
+EXTEND_TOP ~obsdem01.bcs~ ~arestorationp/baf/obsdem01.baf~
+
+COMPILE ~arestorationp/dlg/firwlf01.d~
+
+COMPILE ~arestorationp/dlg/imoenj.d~
+EXTEND_BOTTOM ~imoen.bcs~ ~arestorationp/baf/imoen.baf~
+COMPILE ~arestorationp/baf/l-trlig.baf~
+COPY_EXISTING ~ar0602.are~ override
+LPF fj_are_structure
+INT_VAR
+fj_type = 0
+fj_box_left = 2775
+fj_box_top = 3239
+fj_box_right = 3022
+fj_box_bottom = 3410
+fj_cursor_idx = 0
+fj_vertex_0     = 2775 + (3281 << 16)
+fj_vertex_1     = 2839 + (3239 << 16)
+fj_vertex_2     = 3022 + (3368 << 16)
+fj_vertex_3     = 2955 + (3410 << 16)
+fj_trap_active = 1
+fj_loc_x = 2895
+fj_loc_y = 3326
+STR_VAR
+fj_structure_type = region
+fj_reg_script = L-TRLIG
+fj_name = L-LightTrig
+END
+
+COMPILE ~arestorationp/dlg/firkra03.d~
+COPY_EXISTING ~sewsw.cre~ ~override/firkra03.cre~
+SAY NAME1 #12862
+SAY NAME2 #12838
+WRITE_ASCII 0x248 ~firkra03~ #8
+WRITE_ASCII 0x250 ~~ #8
+WRITE_ASCII 0x280 ~firkra03~ #32
+WRITE_ASCII 0x2cc ~firkra03~ #8
+COMPILE ~arestorationp/baf/firkra03.baf~
+COMPILE ~arestorationp/dlg/firkra02.d~
+EXTEND_BOTTOM ~ar1202.bcs~ ~arestorationp/baf/ar1202.baf~
+
+COPY_EXISTING ~aemerhob.bcs~ override
+DECOMPILE_AND_PATCH BEGIN
+REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~Dead("aewimer1")
+Dead("aewimer1")
+Dead("aewimer1")~ ~Dead("aewimer1")
+Dead("aewimer2")
+Dead("aewimer3")~
+END
+COPY_EXISTING ~ar1200.are~ override
+      LPF fj_are_structure
+        INT_VAR
+        fj_loc_x          = 3306
+        fj_loc_y          = 1842
+        fj_dest_loc_x     = 3306
+        fj_dest_loc_y     = 1842
+        fj_animation      = 0x8100
+        fj_orientation    = 8
+        STR_VAR
+        fj_structure_type = actor
+        fj_name           = ~Hobgoblin archer~
+        fj_cre_resref     = aemerhob
+      END
+COPY_EXISTING ~ar1200.are~ override
+      LPF fj_are_structure
+        INT_VAR
+        fj_loc_x          = 3326
+        fj_loc_y          = 2008
+        fj_dest_loc_x     = 3326
+        fj_dest_loc_y     = 2008
+        fj_animation      = 0x8100
+        fj_orientation    = 0
+        STR_VAR
+        fj_structure_type = actor
+        fj_name           = ~Hobgoblin archer~
+        fj_cre_resref     = aemerhob
+      END
+COPY_EXISTING ~ar1200.are~ override
+      LPF fj_are_structure
+        INT_VAR
+        fj_loc_x          = 3332
+        fj_loc_y          = 1980
+        fj_dest_loc_x     = 3332
+        fj_dest_loc_y     = 1980
+        fj_animation      = 0xca00
+        fj_orientation    = 0
+        STR_VAR
+        fj_structure_type = actor
+        fj_name           = ~Merchant~
+        fj_cre_resref     = aewimer1
+      END
+COPY_EXISTING ~ar1200.are~ override
+      LPF fj_are_structure
+        INT_VAR
+        fj_loc_x          = 3289
+        fj_loc_y          = 1919
+        fj_dest_loc_x     = 3289
+        fj_dest_loc_y     = 1919
+        fj_animation      = 0xc800
+        fj_orientation    = 8
+        STR_VAR
+        fj_structure_type = actor
+        fj_name           = ~Merchant~
+        fj_cre_resref     = aewimer2
+      END
+COPY_EXISTING ~ar1200.are~ override
+      LPF fj_are_structure
+        INT_VAR
+        fj_loc_x          = 3363
+        fj_loc_y          = 1891
+        fj_dest_loc_x     = 3363
+        fj_dest_loc_y     = 1891
+        fj_animation      = 0x6300
+        fj_orientation    = 7
+        STR_VAR
+        fj_structure_type = actor
+        fj_name           = ~Merchant~
+        fj_cre_resref     = aewimer3
+      END
+
+COMPILE ~arestorationp/dlg/kpcook01.d~
+
+COMPILE ~arestorationp/dlg/daleson.d~
+EXTEND_BOTTOM ~ar1306.bcs~ ~arestorationp/baf/ar1306.baf~
+
+COMPILE ~arestorationp/dlg/sarvolo.d~
+ADD_JOURNAL #73960
+
+COPY_EXISTING ~ar1000.are~ override
+      LPF fj_are_structure
+        INT_VAR
+        fj_loc_x          = 3349
+        fj_loc_y          = 2939
+        fj_dest_loc_x     = 3349
+        fj_dest_loc_y     = 2939
+        fj_animation      = 0xca00
+        fj_orientation    = 7
+        STR_VAR
+        fj_structure_type = actor
+        fj_name           = ~Tax Collector~
+        fj_cre_resref     = taxcoll
+      END
+
+COMPILE ~arestorationp/dlg/worker01.d~
+
+EXTEND_TOP ~anomen.bcs~ ~arestorationp/baf/anomen.baf~
+COMPILE ~arestorationp/dlg/anomenj.d~
+
+COMPILE EVALUATE_BUFFER ~arestorationp/dlg/hendak.d~
+
+COMPILE ~arestorationp/dlg/orphan1.d~
+
+COPY_EXISTING ~ar0205.are~ override
+      LPF fj_are_structure
+        INT_VAR
+        fj_loc_x          = 54
+        fj_loc_y          = 1002
+        fj_dest_loc_x     = 54
+        fj_dest_loc_y     = 1002
+        fj_animation      = 0x7f15
+        fj_orientation    = 15
+        STR_VAR
+        fj_structure_type = actor
+        fj_name           = ~Gas Spore~
+        fj_cre_resref     = behgas01
+      END
+COPY_EXISTING ~ar0205.are~ override
+      LPF fj_are_structure
+        INT_VAR
+        fj_loc_x          = 489
+        fj_loc_y          = 1036
+        fj_dest_loc_x     = 489
+        fj_dest_loc_y     = 1036
+        fj_animation      = 0x7f15
+        fj_orientation    = 1
+        STR_VAR
+        fj_structure_type = actor
+        fj_name           = ~Gas Spore~
+        fj_cre_resref     = behgas01
+      END
+      
+COMPILE ~arestorationp/baf/gspore.baf~
+
+EXTEND_TOP ~smugplot.bcs~ ~arestorationp/baf/smugplot.baf~
+COMPILE ~arestorationp/dlg/amcarras.d~
+COMPILE ~arestorationp/dlg/ammonk02.d~
+
+COMPILE ~arestorationp/dlg/dadrow12.d~
+
+COPY_EXISTING ~haerdali.bcs~ override
+DECOMPILE_AND_PATCH BEGIN
+REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~OR(3)~ ~OR(4)
+Global("HaerDalisGemQuest","GLOBAL",5)~
+END
+
+COMPILE ~arestorationp/dlg/haerdaj.d~
+
+COMPILE ~arestorationp/dlg/hellfear.d~
+COMPILE ~arestorationp/baf/l-fear.baf~
+COPY_EXISTING ~hellfear.cre~ override
+WRITE_ASCII 0x248 ~l-fear~ #8
+
+COMPILE ~arestorationp/dlg/drenden.d~
+
+COMPILE ~arestorationp/dlg/sengua01.d~
+ADD_JOURNAL #67465
+
+COMPILE ~arestorationp/dlg/udsvir04.d~
+ADD_JOURNAL #57854
+
+COMPILE ~arestorationp/dlg/townc01.d~
+
+ACTION_IF (NOT MOD_IS_INSTALLED "setup-solaufein.tp2" "0") AND (NOT MOD_IS_INSTALLED "setup-ease.tp2" "11") AND (NOT MOD_IS_INSTALLED "SETUP-BG2_TWEAKS.tp2" "1070") BEGIN
+COMPILE ~arestorationp/dlg/multi.d~ END ELSE BEGIN
+PRINT "Multiplayer dialogues are not Solaufein-compatible or Tweaks-compatible. They do it a bit better."
+END
+
+BEGIN @300
+COPY_EXISTING ~ammerc01.cre~ ~override~
+	SAY DAMAGE ~~ [1AMERC03]
+	SAY DYING ~~ [1AMERC04]
+	SAY MORALE ~~ [1AMERC05]
+
+COPY_EXISTING gromg01.cre override
+	      gromg06.cre override
+	      gromg14.cre override
+	SAY DAMAGE ~~ [1GROMG03]
+	SAY DYING ~~ [1GROMG04]
+	SAY MORALE ~~ [1GROMG05]
+
+COPY_EXISTING gromg02.cre override
+	SAY DAMAGE ~~ [2GROMG03]
+	SAY DYING ~~ [2GROMG04]
+	SAY MORALE ~~ [2GROMG05]
+
+COPY_EXISTING ammonk03.cre override
+	SAY DAMAGE ~~ [3AMONK04]
+	SAY DYING ~~ [3AMONK05]
+	SAY MORALE ~~ [3AMONK06]
+
+COPY_EXISTING rielev.cre override
+	SAY SELECT_COMMON1  ~~ [RIELEV01]
+	SAY BATTLE_CRY1  ~~ [RIELEV03]
+	SAY DAMAGE  ~~ [RIELEV04]
+	SAY DYING  ~~ [RIELEV05]
+	SAY MORALE ~~ [RIELEV20]
+
+COPY_EXISTING udsvir03.cre override
+	SAY BATTLE_CRY1 ~~ [GOLDAN03]
+	SAY BATTLE_CRY2 ~~ [GOLDAN04]
+	SAY DAMAGE ~~ [GOLDAN05]
+	SAY DYING ~~ [GOLDAN06]
+	SAY SELECT_COMMON1 ~~ [GOLDAN13]
+	SAY SELECT_COMMON2 ~~ [GOLDAN14]
+	SAY SELECT_COMMON3 ~~ [GOLDAN16]
+	SAY DIALOG_HOSTILE ~~ [GOLDAN20]
+	SAY UNHAPPY_BREAKING_POINT ~~ [GOLDAN21]
+	SAY MORALE ~~ [GOLDAN24]
+
+COPY_EXISTING gorcamb.cre override
+	SAY DAMAGE ~~ [GORCAM04]
+
+COPY_EXISTING wasleep.cre override
+				watch6.cre override
+				watch9.cre override
+	SAY DAMAGE ~~ [GUARR05]
+	SAY DYING ~~ [GUARR06]
+
+COPY_EXISTING hellgree.cre override
+	SAY SELECT_COMMON1 ~~ [HELGRE01]
+	SAY DAMAGE ~~ [HELGRE04]
+	SAY DYING ~~ [HELGRE05]
+
+COPY_EXISTING hgnya01.cre override
+	SAY SELECT_COMMON1 ~~ [HGNYA01]
+	SAY BATTLE_CRY1 ~~ [HGNYA02]
+	SAY BATTLE_CRY2 ~~ [HGNYA03]
+	SAY DAMAGE ~~ [HGNYA04]
+	SAY DYING ~~ [HGNYA05]
+	SAY MORALE ~~ [HGNYA06]
+
+COPY_EXISTING ffcrowd4.cre override
+	SAY SELECT_COMMON1 ~~ [PEASF06]
+
+COPY_EXISTING ppbhaal.cre override
+	SAY DAMAGE ~~ [PPBHAA09]
+
+COPY_EXISTING saerk.cre override
+	SAY DAMAGE ~~ [SAERK03]
+	SAY DYING ~~ [SAERK04]
+
+COPY_EXISTING sendai.cre override
+	      sendai2.cre override
+	      sendai3.cre override
+	      sendai4.cre override
+	      sendai5.cre override
+	      sendai6.cre override
+	      sendai7.cre override
+	SAY DAMAGE ~~ [SENDAI04]
+	SAY DYING ~~ [SENDAI05]
+	SAY MORALE ~~ [SENDAI06]
+
+COPY_EXISTING senpri01.cre override
+	SAY DAMAGE ~~ [SENPRI04]
+	SAY DYING ~~ [SENPRI05]
+	SAY MORALE ~~ [SENPRI06]
+
+COPY_EXISTING clone1.cre override
+	SAY DAMAGE ~~ [SILLL03]
+	SAY DYING ~~ [SILLL04]
+
+COPY_EXISTING ttbelt.cre override
+	SAY DAMAGE ~~ [TTBELT23]
+
+COPY_EXISTING ttbran.cre override
+	SAY DAMAGE ~~ [BRANW38]
+	SAY DYING ~~ [BRANW39]
+
+COPY_EXISTING ttser1.cre override
+	SAY DAMAGE ~~ [TTSER103]
+
+COPY_EXISTING ttxan.cre override
+	SAY DAMAGE ~~ [XANNN38]
+	SAY DYING ~~ [XANNN39]
+
+COPY_EXISTING udvith.cre override
+	SAY DAMAGE ~~ [VITHAL05]
+	SAY DYING ~~ [VITHAL06]
+	SAY MORALE ~~ [VITHAL28]
+
+COPY_EXISTING wpwench1.cre override
+	SAY DAMAGE ~~ [WENCH03]
+	SAY DYING ~~ [WENCH04]
+	SAY INITIAL_MEETING ~~ [WENCH01]
+	SAY SELECT_COMMON1 ~~ [WENCH01]
+	SAY SELECT_COMMON2 ~~ [WENCH02]
+
+COPY_EXISTING yaga01.cre override
+	SAY DAMAGE ~~ [YAGA04]
+	SAY DYING ~~ [YAGA05]
+
+COPY_EXISTING ammerc02.cre override
+	SAY DAMAGE ~~ [2AMERC04]
+	SAY DYING ~~ [2AMERC05]
+
+COPY_EXISTING ammayor.cre override
+	SAY DAMAGE ~~ [AMMAYO04]
+	SAY DYING ~~ [AMMAYO05]
+	SAY MORALE ~~ [AMMAYO06]
+
+COPY_EXISTING delcia.cre override
+	SAY SELECT_COMMON1 ~~ [DELCIA01]
+	SAY DAMAGE ~~ [DELCIA04]
+	SAY DYING ~~ [DELCIA05]
+	SAY MORALE ~~ [DELCIA20]
+
+COPY_EXISTING turn.cre override
+	      werewyv1.cre override
+	      yaga03.cre override
+	      yaga04.cre override
+	SAY SELECT_COMMON1 ~~ [DEMONV01]
+	SAY DAMAGE ~~ [DEMONV06]
+	SAY DYING ~~ [DEMONV07]
+	SAY MORALE ~~ [DEMONV08]
+
+COPY_EXISTING_REGEXP ~.*\.cre~ ~override~
+  READ_LONG 0x10c selected
+  PATCH_IF selected = 3669 BEGIN
+	SAY DAMAGE ~~ [GARRK38]
+	SAY DYING ~~ [GARRK39]
+  END
+  PATCH_IF selected = 73177 BEGIN
+	SAY DAMAGE ~~ [1AMONK04]
+    SAY DYING ~~ [1AMONK05]
+	SAY MORALE ~~ [1AMONK06]
+  END
+  PATCH_IF selected = 11134 BEGIN
+	SAY DAMAGE ~~ [2AMONK04]
+    SAY DYING ~~ [2AMONK05]
+	SAY MORALE ~~ [2AMONK06]
+  END
+  PATCH_IF selected = 72945 BEGIN
+	SAY DAMAGE ~~ [3AMERC04]
+    SAY DYING ~~ [3AMERC05]
+  END
+  PATCH_IF selected = 72950 BEGIN
+	SAY DAMAGE ~~ [4AMONK04]
+	SAY DYING ~~ [4AMONK05]
+	SAY MORALE ~~ [4AMONK06]
+  END
+  PATCH_IF selected = 72907 BEGIN
+	SAY DAMAGE ~~ [ABAZIG05]
+    SAY DYING ~~ [ABAZIG06]
+  END
+  PATCH_IF selected = 72918 BEGIN
+	SAY DAMAGE ~~ [AMARCH05]
+    SAY DYING ~~ [AMARCH06]
+	SAY MORALE ~~ [AMARCH07]
+  END
+  PATCH_IF selected = 72966 BEGIN
+	SAY DAMAGE ~~ [AMASAN04]
+    SAY DYING ~~ [AMASAN05]
+	SAY MORALE ~~ [AMASAN06]
+  END
+  PATCH_IF selected = 72996 BEGIN
+	SAY DAMAGE ~~ [AMCARR04]
+    SAY DYING ~~ [AMCARR05]
+	SAY MORALE ~~ [AMCARR06]
+  END
+  PATCH_IF selected = 72925 BEGIN
+	SAY DAMAGE ~~ [AMCLER04]
+    SAY DYING ~~ [AMCLER05]
+	SAY BATTLE_CRY2 ~~ [AMCLER03]
+	SAY MORALE ~~ [AMCLER06]
+  END
+  PATCH_IF selected = 42023 BEGIN
+	SAY DAMAGE ~~ [AMGRDX06]
+    SAY DYING ~~ [AMGRDX05]
+  END
+  PATCH_IF selected = 42156 BEGIN
+	SAY DAMAGE ~~ [AMGRDX06]
+    SAY DYING ~~ [AMGRDX05]
+  END
+  PATCH_IF selected = 60252 BEGIN
+	SAY DAMAGE ~~ [ARAN05]
+    SAY DYING ~~ [ARAN06]
+	SAY MORALE ~~ [ARAN39]
+  END
+  PATCH_IF selected = 60273 BEGIN
+	SAY DAMAGE ~~ [ARDULA05]
+    SAY DYING ~~ [ARDULA06]
+	SAY MORALE ~~ [ARDULA26]
+  END
+  PATCH_IF selected = 72978 BEGIN
+	SAY DAMAGE ~~ [BALTHA04]
+    SAY DYING ~~ [BALTHA05]
+	SAY MORALE ~~ [BALTHA06]
+  END
+  PATCH_IF selected = 559915 BEGIN
+	SAY DAMAGE ~~ [BARONP04]
+    SAY DYING ~~ [BARONP05]
+	SAY MORALE ~~ [BARONP20]
+  END
+  PATCH_IF selected = 4945 BEGIN
+	SAY DAMAGE ~~ [BARTN05]
+    SAY DYING ~~ [BARTN06]
+  END
+  PATCH_IF selected = 73039 BEGIN
+	SAY DAMAGE ~~ [BAZDRA04]
+    SAY DYING ~~ [BAZDRA05]
+	SAY MORALE ~~ [BAZDRA06]
+  END
+  PATCH_IF selected = 60482 BEGIN
+	SAY DAMAGE ~~ [BDHIGG05]
+    SAY DYING ~~ [BDHIGG06]
+	SAY MORALE ~~ [BDHIGG46]
+  END
+  PATCH_IF selected = 4869 BEGIN
+	SAY DAMAGE ~~ [BEGGR05]
+    SAY DYING ~~ [BEGGR06]
+  END
+  PATCH_IF selected = 4871 BEGIN
+	SAY DAMAGE ~~ [BEGGR05]
+    SAY DYING ~~ [BEGGR06]
+  END
+  PATCH_IF selected = 4872 BEGIN
+	SAY DAMAGE ~~ [BEGGR05]
+    SAY DYING ~~ [BEGGR06]
+  END
+  PATCH_IF selected = 4870 BEGIN
+	SAY DAMAGE ~~ [BEGGR05]
+    SAY DYING ~~ [BEGGR06]
+  END
+  PATCH_IF selected = 60295 BEGIN
+	SAY DAMAGE ~~ [BODHIX06]
+    SAY DYING ~~ [BODHIX07]
+  END
+  PATCH_IF selected = 60062 BEGIN
+	SAY DAMAGE ~~ [BREGAX04]
+    SAY SELECT_COMMON2 ~~ [BREGAX09]
+    SAY SELECT_COMMON3 ~~ [BREGAX10]
+    SAY SELECT_COMMON4 ~~ [BREGAX11]
+	SAY DIALOG_HOSTILE ~~ [BREGAX12]
+	SAY UNHAPPY_BREAKING_POINT ~~ [BREGAX17]
+	SAY MORALE ~~ [BREGAX20]
+  END
+  PATCH_IF selected = 60300 BEGIN
+	SAY DAMAGE ~~ [BUSYA05]
+    SAY DYING ~~ [BUSYA06]
+	SAY UNHAPPY_SERIOUS ~~ [BUSYA18]
+	SAY UNHAPPY_BREAKING_POINT ~~ [BUSYA19]
+	SAY MORALE ~~ [BUSYA22]
+  END
+  PATCH_IF selected = 60404 BEGIN
+	SAY DAMAGE ~~ [CEFALD05]
+    SAY DYING ~~ [CEFALD06]
+	SAY MORALE ~~ [CEFALD31]
+  END
+  PATCH_IF selected = 60208 BEGIN
+	SAY SELECT_COMMON2 ~~ [CELOGA22]
+    SAY SELECT_COMMON3 ~~ [CELOGA23]
+	SAY SELECT_COMMON4 ~~ [CELOGA24]
+	SAY UNHAPPY_SERIOUS ~~ [CELOGA28]
+	SAY UNHAPPY_BREAKING_POINT ~~ [CELOGA29]
+	SAY MORALE ~~ [CELOGA32]
+  END
+  PATCH_IF selected = 61552 BEGIN
+	SAY DAMAGE ~~ [CHILF05]
+    SAY DYING ~~ [CHILF06]
+	SAY MORALE ~~ [CHILF07]
+  END
+  PATCH_IF selected = 61555 BEGIN
+	SAY DAMAGE ~~ [CHILF05]
+    SAY DYING ~~ [CHILF06]
+	SAY MORALE ~~ [CHILF07]
+  END
+  PATCH_IF selected = 61561 BEGIN
+	SAY DAMAGE ~~ [CHILM05]
+    SAY DYING ~~ [CHILM06]
+	SAY MORALE ~~ [CHILM07]
+  END
+  PATCH_IF selected = 60144 BEGIN
+	SAY BATTLE_CRY2 ~~ [COR18]
+	SAY BATTLE_CRY3 ~~ [COR19]
+	SAY DAMAGE ~~ [COR20]
+    SAY DYING ~~ [COR21]
+	SAY MORALE ~~ [COR22]
+  END
+  PATCH_IF selected = 3823 BEGIN
+	SAY DAMAGE ~~ [CORAN38]
+    SAY DYING ~~ [CORAN39]
+  END
+  PATCH_IF selected = 59523 BEGIN
+	SAY DAMAGE ~~ [CORGEI04]
+    SAY DYING ~~ [CORGEI05]
+	SAY MORALE ~~ [CORGEI20]
+  END
+  PATCH_IF selected = 60317 BEGIN
+	SAY DAMAGE ~~ [DEMIN05]
+    SAY DYING ~~ [DEMIN06]
+	SAY MORALE ~~ [DEMIN24]
+  END
+  PATCH_IF selected = 73028 BEGIN
+	SAY DAMAGE ~~ [DEMOG04]
+    SAY DYING ~~ [DEMOG05]
+  END
+  PATCH_IF selected = 59947 BEGIN
+	SAY DAMAGE ~~ [DEMSON04]
+    SAY DYING ~~ [DEMSON05]
+	SAY MORALE ~~ [DEMSON20]
+  END
+  PATCH_IF selected = 59931 BEGIN
+	SAY DAMAGE ~~ [DERILX04]
+    SAY DYING ~~ [DERILX05]
+	SAY MORALE ~~ [DERILX06]
+  END
+  PATCH_IF selected = 60334 BEGIN
+	SAY DAMAGE ~~ [DESHAR05]
+    SAY DYING ~~ [DESHAR06]
+	SAY MORALE ~~ [DESHAR25]
+  END
+  PATCH_IF selected = 51869 BEGIN
+	SAY DAMAGE ~~ [DRFEM105]
+    SAY DYING ~~ [DRFEM106]
+	SAY MORALE ~~ [DRFEM107]
+  END
+  PATCH_IF selected = 60359 BEGIN
+	SAY DAMAGE ~~ [DRIZZT05]
+    SAY DYING ~~ [DRIZZT06]
+	SAY MORALE ~~ [DRIZZT22]
+  END
+  PATCH_IF selected = 53293 BEGIN
+	SAY DAMAGE ~~ [DRMEN105]
+    SAY DYING ~~ [DRMEN106]
+	SAY MORALE ~~ [DRMEN107]
+  END
+  PATCH_IF selected = 53358 BEGIN
+	SAY DAMAGE ~~ [DRPRIS06]
+    SAY DYING ~~ [DRPRIS05]
+	SAY MORALE ~~ [DRPRIS07]
+  END
+  PATCH_IF selected = 53673 BEGIN
+	SAY DAMAGE ~~ [DRSOL106]
+    SAY DYING ~~ [DRSOL105]
+	SAY MORALE ~~ [DRSOL107]
+  END
+  PATCH_IF selected = 4916 BEGIN
+	SAY DAMAGE ~~ [DRUID05]
+    SAY DYING ~~ [DRUID06]
+  END
+  PATCH_IF selected = 4967 BEGIN
+	SAY DAMAGE ~~ [DRUNK05]
+    SAY DYING ~~ [DRUNK06]
+  END
+  PATCH_IF selected = 4972 BEGIN
+	SAY DAMAGE ~~ [DRUNK05]
+    SAY DYING ~~ [DRUNK06]
+  END
+  PATCH_IF selected = 5180 BEGIN
+	SAY DAMAGE ~~ [DRYAD08]
+    SAY DYING ~~ [DRYAD09]
+  END
+  PATCH_IF selected = 5186 BEGIN
+	SAY DAMAGE ~~ [DRYAD08]
+    SAY DYING ~~ [DRYAD09]
+  END
+  PATCH_IF selected = 4936 BEGIN
+	SAY DAMAGE ~~ [DWARF05]
+    SAY DYING ~~ [DWARF06]
+  END
+  PATCH_IF selected = 11179 BEGIN
+	SAY DAMAGE ~~ [DWRFF05]
+    SAY DYING ~~ [DWRFF06]
+  END
+  PATCH_IF selected = 4941 BEGIN
+	SAY DAMAGE ~~ [ELFFF05]
+    SAY DYING ~~ [ELFFF06]
+  END
+  PATCH_IF selected = 60376 BEGIN
+	SAY DAMAGE ~~ [ELHAN105]
+    SAY DYING ~~ [ELHAN106]
+	SAY MORALE ~~ [ELHAN132]
+  END
+  PATCH_IF selected = 60395 BEGIN
+	SAY DAMAGE ~~ [ELLESI05]
+    SAY DYING ~~ [ELLESI06]
+	SAY MORALE ~~ [ELLESI36]
+  END
+  PATCH_IF selected = 53666 BEGIN
+	SAY DAMAGE ~~ [ELSOL106]
+    SAY DYING ~~ [ELSOL105]
+  END
+  PATCH_IF selected = 61606 BEGIN
+	SAY DAMAGE ~~ [EPRIF06]
+    SAY DYING ~~ [EPRIF07]
+	SAY MORALE ~~ [EPRIF08]
+  END
+  PATCH_IF selected = 61614 BEGIN
+	SAY DAMAGE ~~ [EPRIM06]
+    SAY DYING ~~ [EPRIM07]
+	SAY MORALE ~~ [EPRIM08]
+  END
+  PATCH_IF selected = 61623 BEGIN
+	SAY DAMAGE ~~ [FANATF06]
+    SAY DYING ~~ [FANATF07]
+	SAY MORALE ~~ [FANATF08]
+  END
+  PATCH_IF selected = 61631 BEGIN
+	SAY DAMAGE ~~ [FANATM06]
+    SAY DYING ~~ [FANATM07]
+	SAY MORALE ~~ [FANATM08]
+  END
+  PATCH_IF selected = 4908 BEGIN
+	SAY DAMAGE ~~ [FARME05]
+    SAY DYING ~~ [FARME06]
+  END
+  PATCH_IF selected = 4862 BEGIN
+	SAY DAMAGE ~~ [FCHIL05]
+    SAY DYING ~~ [FCHIL06]
+  END
+  PATCH_IF selected = 53630 BEGIN
+	SAY DAMAGE ~~ [FEMELF06]
+    SAY DYING ~~ [FEMELF05]
+  END
+  PATCH_IF selected = 38848 BEGIN
+	SAY DAMAGE ~~ [FEMER06]
+    SAY DYING ~~ [FEMER05]
+  END
+  PATCH_IF selected = 47345 BEGIN
+	SAY DAMAGE ~~ [FEMSAL06]
+    SAY DYING ~~ [FEMSAL05]
+  END
+  PATCH_IF selected = 4920 BEGIN
+	SAY DAMAGE ~~ [FESTH05]
+    SAY DYING ~~ [FESTH06]
+  END
+  PATCH_IF selected = 53680 BEGIN
+	SAY DAMAGE ~~ [FFBART06]
+    SAY DYING ~~ [FFBART05]
+  END
+  PATCH_IF selected = 60510 BEGIN
+	SAY DAMAGE ~~ [FIRKRA05]
+    SAY DYING ~~ [FIRKRA06]
+	SAY DIALOG_HOSTILE ~~ [FIRKRA26]
+	SAY MORALE ~~ [FIRKRA29]
+  END
+  PATCH_IF selected = 60426 BEGIN
+	SAY DAMAGE ~~ [GAAL05]
+  END
+  PATCH_IF selected = 60443 BEGIN
+	SAY DAMAGE ~~ [GAELEN05]
+    SAY DYING ~~ [GAELEN06]
+	SAY MORALE ~~ [GAELEN50]
+  END
+  PATCH_IF selected = 4989 BEGIN
+	SAY DAMAGE ~~ [GAMES05]
+    SAY DYING ~~ [GAMES06]
+  END
+  PATCH_IF selected = 59503 BEGIN
+	SAY DAMAGE ~~ [GARREN04]
+    SAY DYING ~~ [GARREN05]
+	SAY MORALE ~~ [GARREN20]
+  END
+  PATCH_IF selected = 61980 BEGIN
+	SAY DAMAGE ~~ [GGFEM04]
+    SAY DYING ~~ [GGFEM05]
+  END
+  PATCH_IF selected = 4932 BEGIN
+	SAY DAMAGE ~~ [GNOME05]
+    SAY DYING ~~ [GNOME06]
+  END
+  PATCH_IF selected = 61693 BEGIN
+	SAY DAMAGE ~~ [GNOMEF06]
+    SAY DYING ~~ [GNOMEF07]
+	SAY MORALE ~~ [GNOMEF08]
+  END
+  PATCH_IF selected = 61701 BEGIN
+	SAY DAMAGE ~~ [GNOMEM06]
+    SAY DYING ~~ [GNOMEM07]
+	SAY MORALE ~~ [GNOMEM08]
+  END
+  PATCH_IF selected = 73056 BEGIN
+	SAY DAMAGE ~~ [GORBAT04]
+    SAY DYING ~~ [GORBAT05]
+	SAY BATTLE_CRY1 ~~ [GORBAT3]
+  END
+  PATCH_IF selected = 73004 BEGIN
+	SAY DAMAGE ~~ [GORCAR04]
+    SAY DYING ~~ [GORCAR05]
+  END
+  PATCH_IF selected = 73016 BEGIN
+	SAY DAMAGE ~~ [GORCHR04]
+    SAY DYING ~~ [GORCHR05]
+  END
+  PATCH_IF selected = 73201 BEGIN
+	SAY DAMAGE ~~ [GORMAD04]
+    SAY DYING ~~ [GORMAD05]
+  END
+  PATCH_IF selected = 73073 BEGIN
+	SAY DAMAGE ~~ [GORTAN04]
+    SAY DYING ~~ [GORTAN05]
+  END
+  PATCH_IF selected = 61710 BEGIN
+	SAY DAMAGE ~~ [GPRIF06]
+    SAY DYING ~~ [GPRIF07]
+	SAY MORALE ~~ [GPRIF08]
+  END
+  PATCH_IF selected = 61724 BEGIN
+	SAY DAMAGE ~~ [GPRIM06]
+    SAY DYING ~~ [GPRIM07]
+	SAY MORALE ~~ [GPRIM08]
+  END
+  PATCH_IF selected = 73114 BEGIN
+	SAY DAMAGE ~~ [GROM04]
+  END
+  PATCH_IF selected = 11238 BEGIN
+	SAY DAMAGE ~~ [HALFF05]
+    SAY DYING ~~ [HALFF06]
+  END
+  PATCH_IF selected = 11240 BEGIN
+	SAY DAMAGE ~~ [HALFF05]
+    SAY DYING ~~ [HALFF06]
+  END
+  PATCH_IF selected = 4924 BEGIN
+	SAY DAMAGE ~~ [HALFL05]
+    SAY DYING ~~ [HALFL06]
+  END
+  PATCH_IF selected = 4925 BEGIN
+	SAY DAMAGE ~~ [HALFL05]
+    SAY DYING ~~ [HALFL06]
+  END
+  PATCH_IF selected = 4926 BEGIN
+	SAY DAMAGE ~~ [HALFL05]
+    SAY DYING ~~ [HALFL06]
+  END
+  PATCH_IF selected = 60422 BEGIN
+	SAY DAMAGE ~~ [HELFEA04]
+    SAY DYING ~~ [HELFEA05]
+  END
+  PATCH_IF selected = 60400 BEGIN
+	SAY DAMAGE ~~ [HELGEN04]
+    SAY DYING ~~ [HELGEN05]
+  END
+  PATCH_IF selected = 4976 BEGIN
+	SAY DAMAGE ~~ [HELMP05]
+    SAY DYING ~~ [HELMP06]
+  END
+  PATCH_IF selected = 60633 BEGIN
+	SAY DAMAGE ~~ [HELPRI04]
+    SAY DYING ~~ [HELPRI05]
+  END
+  PATCH_IF selected = 60688 BEGIN
+	SAY DAMAGE ~~ [HELSAR04]
+    SAY DYING ~~ [HELSAR05]
+  END
+  PATCH_IF selected = 60709 BEGIN
+	SAY DAMAGE ~~ [HELSEL04]
+    SAY DYING ~~ [HELSEL05]
+  END
+  PATCH_IF selected = 60095 BEGIN
+	SAY DAMAGE ~~ [HENDAK04]
+    SAY DYING ~~ [HENDAK05]
+  END
+  PATCH_IF selected = 61783 BEGIN
+	SAY DAMAGE ~~ [HUMAN07]
+    SAY DYING ~~ [HUMAN08]
+	SAY MORALE ~~ [HUMAN09]
+  END
+  PATCH_IF selected = 61766 BEGIN
+	SAY DAMAGE ~~ [HVILLF06]
+    SAY DYING ~~ [HVILLF07]
+	SAY MORALE ~~ [HVILLF08]
+  END
+  PATCH_IF selected = 61774 BEGIN
+	SAY DAMAGE ~~ [HVILLM06]
+    SAY DYING ~~ [HVILLM07]
+	SAY MORALE ~~ [HVILLF08]
+  END
+  PATCH_IF selected = 73126 BEGIN
+	SAY DAMAGE ~~ [ILLASE04]
+    SAY DYING ~~ [ILLASE05]
+  END
+  PATCH_IF selected = 4948 BEGIN
+	SAY DAMAGE ~~ [INNKE05]
+    SAY DYING ~~ [INNKE06]
+  END
+  PATCH_IF selected = 60192 BEGIN
+	SAY MORALE ~~ [INSPEC20]
+  END
+  PATCH_IF selected = 60500 BEGIN
+	SAY DAMAGE ~~ [IRENIC05]
+    SAY DYING ~~ [IRENIC06]
+  END
+  PATCH_IF selected = 53687 BEGIN
+	SAY DAMAGE ~~ [ISAEAX04]
+    SAY DYING ~~ [ISAEAX05]
+	SAY DIALOG_HOSTILE ~~ [ISAEAX16]
+	SAY UNHAPPY_BREAKING_POINT ~~ [ISAEAX17]
+	SAY SELECT_COMMON1 ~~ [ISAEAX09]
+	SAY SELECT_COMMON2 ~~ [ISAEAX12]
+	SAY SELECT_COMMON3 ~~ [ISAEAX11]
+	SAY SELECT_COMMON4 ~~ [ISAEAX10]
+	SAY MORALE ~~ [ISAEAX20]
+  END
+  PATCH_IF selected = 60046 BEGIN
+	SAY DAMAGE ~~ [JARIEL04]
+    SAY DYING ~~ [JARIEL05]
+	SAY MORALE ~~ [JARIEL20]
+  END
+  PATCH_IF selected = 60544 BEGIN
+	SAY DAMAGE ~~ [KALAH06]
+    SAY MORALE ~~ [KALAH26]
+  END
+  PATCH_IF selected = 60176 BEGIN
+	SAY DAMAGE ~~ [KAYLXX04]
+	SAY MORALE ~~ [KAYLXX20]
+  END
+  PATCH_IF selected = 60596 BEGIN
+	SAY DAMAGE ~~ [KPDOMO05]
+    SAY DYING ~~ [KPDOMO06]
+	SAY MORALE ~~ [KPDOMO25]
+  END
+  PATCH_IF selected = 60013 BEGIN
+	SAY SELECT_COMMON2 ~~ [LATHAN09]
+	SAY SELECT_COMMON3 ~~ [LATHAN10]
+	SAY SELECT_COMMON4 ~~ [LATHAN11]
+	SAY BATTLE_CRY2 ~~ [LATHAN17]
+	SAY DAMAGE ~~ [LATHAN04]
+    SAY DYING ~~ [LATHAN05]
+	SAY MORALE ~~ [LATHAN20]
+  END
+  PATCH_IF selected = 60562 BEGIN
+	SAY DAMAGE ~~ [LAVOK05]
+    SAY DYING ~~ [LAVOK06]
+	SAY MORALE ~~ [LAVOK31]
+  END
+  PATCH_IF selected = 60113 BEGIN
+	SAY DAMAGE ~~ [LEHTIN04]
+    SAY DYING ~~ [LEHTIN05]
+  END
+  PATCH_IF selected = 60579 BEGIN
+	SAY DAMAGE ~~ [MAEVAR05]
+    SAY DYING ~~ [MAEVAR06]
+	SAY MORALE ~~ [MAEVAR26]
+  END
+  PATCH_IF selected = 53515 BEGIN
+	SAY DAMAGE ~~ [MALELF06]
+    SAY DYING ~~ [MALELF05]
+  END
+  PATCH_IF selected = 38781 BEGIN
+	SAY DAMAGE ~~ [MALMER06]
+    SAY DYING ~~ [MALMER05]
+  END
+  PATCH_IF selected = 38783 BEGIN
+	SAY DAMAGE ~~ [MALMER06]
+    SAY DYING ~~ [MALMER05]
+  END
+  PATCH_IF selected = 38785 BEGIN
+	SAY DAMAGE ~~ [MALMER06]
+    SAY DYING ~~ [MALMER05]
+  END
+  PATCH_IF selected = 43072 BEGIN
+	SAY DAMAGE ~~ [MALSAL05]
+    SAY DYING ~~ [MALSAL06]
+  END
+  PATCH_IF selected = 53711 BEGIN
+	SAY DAMAGE ~~ [MARIAX04]
+    SAY DYING ~~ [MARIAX05]
+	SAY MORALE ~~ [MARIAX20]
+  END
+  PATCH_IF selected = 4859 BEGIN
+	SAY SELECT_COMMON1 ~~ [MCHIL01]
+	SAY SELECT_COMMON2 ~~ [MCHIL02]
+	SAY SELECT_COMMON3 ~~ [MCHIL03]
+	SAY SELECT_COMMON4 ~~ [MCHIL04]
+	SAY DAMAGE ~~ [MCHIL05]
+    SAY DYING ~~ [MCHIL06]
+  END
+  PATCH_IF selected = 73165 BEGIN
+	SAY DAMAGE ~~ [MELISS04]
+  END
+  PATCH_IF selected = 4959 BEGIN
+	SAY DAMAGE ~~ [MERCH05]
+    SAY DYING ~~ [MERCH06]
+  END
+  PATCH_IF selected = 4885 BEGIN
+	SAY DAMAGE ~~ [MINER05]
+    SAY DYING ~~ [MINER06]
+  END
+  PATCH_IF selected = 60128 BEGIN
+	SAY DAMAGE ~~ [MINIST04]
+    SAY DYING ~~ [MINIST05]
+  END
+  PATCH_IF selected = 4899 BEGIN
+	SAY SELECT_COMMON2 ~~ [MTOWN01]
+	SAY SELECT_COMMON3 ~~ [MTOWN02]
+	SAY DAMAGE ~~ [MTOWN05]
+    SAY DYING ~~ [MTOWN06]
+  END
+  PATCH_IF selected = 4900 BEGIN
+	SAY DAMAGE ~~ [MTOWN05]
+    SAY DYING ~~ [MTOWN06]
+  END
+  PATCH_IF selected = 4720 BEGIN
+	SAY DAMAGE ~~ [MYSTR03]
+    SAY DYING ~~ [MYSTR04]
+  END
+  PATCH_IF selected = 59994 BEGIN
+	SAY DAMAGE ~~ [NALLAB04]
+    SAY DYING ~~ [NALLAB05]
+  END
+  PATCH_IF selected = 61641 BEGIN
+	SAY DAMAGE ~~ [NOBFE07]
+    SAY DYING ~~ [NOBFE08]
+	SAY MORALE ~~ [NOBFE09]
+  END
+  PATCH_IF selected = 61643 BEGIN
+	SAY DAMAGE ~~ [NOBFE07]
+    SAY DYING ~~ [NOBFE08]
+	SAY MORALE ~~ [NOBFE09]
+  END
+  PATCH_IF selected = 61645 BEGIN
+	SAY DAMAGE ~~ [NOBFE07]
+    SAY DYING ~~ [NOBFE08]
+	SAY MORALE ~~ [NOBFE09]
+  END
+  PATCH_IF selected = 61650 BEGIN
+	SAY DAMAGE ~~ [NOBFE207]
+    SAY DYING ~~ [NOBFE208]
+	SAY DYING ~~ [NOBFE209]
+  END
+  PATCH_IF selected = 61651 BEGIN
+	SAY DAMAGE ~~ [NOBFE207]
+    SAY DYING ~~ [NOBFE208]
+	SAY DYING ~~ [NOBFE209]
+  END
+  PATCH_IF selected = 61652 BEGIN
+	SAY DAMAGE ~~ [NOBFE207]
+    SAY DYING ~~ [NOBFE208]
+	SAY DYING ~~ [NOBFE209]
+  END
+  PATCH_IF selected = 61654 BEGIN
+	SAY DAMAGE ~~ [NOBFE207]
+    SAY DYING ~~ [NOBFE208]
+	SAY DYING ~~ [NOBFE209]
+  END
+  PATCH_IF selected = 4874 BEGIN
+	SAY DAMAGE ~~ [NOBLE05]
+    SAY DYING ~~ [NOBLE06]
+	SAY SELECT_COMMON2 ~~ [NOBLE01]
+	SAY SELECT_COMMON3 ~~ [NOBLE04]
+  END
+  PATCH_IF selected = 4875 BEGIN
+	SAY DAMAGE ~~ [NOBLE05]
+    SAY DYING ~~ [NOBLE06]
+	SAY SELECT_COMMON2 ~~ [NOBLE01]
+	SAY SELECT_COMMON3 ~~ [NOBLE04]
+  END
+  PATCH_IF selected = 4877 BEGIN
+	SAY DAMAGE ~~ [NOBLW05]
+    SAY DYING ~~ [NOBLW06]
+	SAY SELECT_COMMON2 ~~ [NOBLE02]
+	SAY SELECT_COMMON3 ~~ [NOBLW04]
+  END
+  PATCH_IF selected = 4879 BEGIN
+	SAY DAMAGE ~~ [NOBLW05]
+    SAY DYING ~~ [NOBLW06]
+	SAY SELECT_COMMON2 ~~ [NOBLE02]
+	SAY SELECT_COMMON3 ~~ [NOBLW04]
+  END
+  PATCH_IF selected = 61833 BEGIN
+	SAY DAMAGE ~~ [NOBMA07]
+        SAY DYING ~~ [NOBMA08]
+	SAY MORALE ~~ [NOBMA09]
+  END
+  PATCH_IF selected = 61835 BEGIN
+	SAY DAMAGE ~~ [NOBMA07]
+    SAY DYING ~~ [NOBMA08]
+	SAY MORALE ~~ [NOBMA09]
+  END
+  PATCH_IF selected = 61836 BEGIN
+	SAY DAMAGE ~~ [NOBMA07]
+    SAY DYING ~~ [NOBMA08]
+	SAY MORALE ~~ [NOBMA09]
+  END
+  PATCH_IF selected = 61837 BEGIN
+	SAY DAMAGE ~~ [NOBMA07]
+    SAY DYING ~~ [NOBMA08]
+	SAY MORALE ~~ [NOBMA09]
+  END
+  PATCH_IF selected = 61838 BEGIN
+	SAY DAMAGE ~~ [NOBMA07]
+    SAY DYING ~~ [NOBMA08]
+	SAY MORALE ~~ [NOBMA09]
+  END
+  PATCH_IF selected = 61824 BEGIN
+	SAY DAMAGE ~~ [NOBMA207]
+    SAY DYING ~~ [NOBMA208]
+	SAY MORALE ~~ [NOBMA209]
+  END
+  PATCH_IF selected = 61826 BEGIN
+	SAY DAMAGE ~~ [NOBMA207]
+    SAY DYING ~~ [NOBMA208]
+	SAY MORALE ~~ [NOBMA209]
+  END
+  PATCH_IF selected = 61827 BEGIN
+	SAY DAMAGE ~~ [NOBMA207]
+    SAY DYING ~~ [NOBMA208]
+	SAY MORALE ~~ [NOBMA209]
+  END
+  PATCH_IF selected = 61828 BEGIN
+	SAY DAMAGE ~~ [NOBMA207]
+    SAY DYING ~~ [NOBMA208]
+	SAY MORALE ~~ [NOBMA209]
+  END
+  PATCH_IF selected = 11156 BEGIN
+	SAY SELECT_COMMON1 ~~ [NOBW202]
+	SAY DAMAGE ~~ [NOBW203]
+    SAY DYING ~~ [NOBW204]
+  END
+  PATCH_IF selected = 72972 BEGIN
+	SAY DAMAGE ~~ [ODREN04]
+    SAY DYING ~~ [ODREN05]
+	SAY MORALE ~~ [ODREN06]
+  END
+  PATCH_IF selected = 4981 BEGIN
+	SAY DAMAGE ~~ [OGHMA03]
+    SAY DYING ~~ [OGHMA04]
+  END
+  PATCH_IF selected = 59963 BEGIN
+	SAY DAMAGE ~~ [OISIGX04]
+    SAY DYING ~~ [OISIGX05]
+	SAY MORALE ~~ [OISIGX20]
+  END
+  PATCH_IF selected = 61659 BEGIN
+	SAY DAMAGE ~~ [PEASF07]
+    SAY DYING ~~ [PEASF08]
+	SAY MORALE ~~ [PEASF09]
+  END
+  PATCH_IF selected = 61661 BEGIN
+	SAY DAMAGE ~~ [PEASF07]
+    SAY DYING ~~ [PEASF08]
+	SAY MORALE ~~ [PEASF09]
+  END
+  PATCH_IF selected = 61664 BEGIN
+	SAY DAMAGE ~~ [PEASF07]
+    SAY DYING ~~ [PEASF08]
+	SAY MORALE ~~ [PEASF09]
+  END
+  PATCH_IF selected = 61668 BEGIN
+	SAY DAMAGE ~~ [PEASF207]
+    SAY DYING ~~ [PEASF208]
+	SAY MORALE ~~ [PEASF209]
+  END
+  PATCH_IF selected = 61671 BEGIN
+	SAY DAMAGE ~~ [PEASF207]
+    SAY DYING ~~ [PEASF208]
+	SAY MORALE ~~ [PEASF209]
+  END
+  PATCH_IF selected = 61673 BEGIN
+	SAY DAMAGE ~~ [PEASF207]
+    SAY DYING ~~ [PEASF208]
+	SAY MORALE ~~ [PEASF209]
+  END
+  PATCH_IF selected = 61678 BEGIN
+	SAY DAMAGE ~~ [PEASF307]
+    SAY DYING ~~ [PEASF308]
+	SAY MORALE ~~ [PEASF309]
+  END
+  PATCH_IF selected = 61680 BEGIN
+	SAY DAMAGE ~~ [PEASF307]
+    SAY DYING ~~ [PEASF308]
+	SAY MORALE ~~ [PEASF309]
+  END
+  PATCH_IF selected = 61682 BEGIN
+	SAY DAMAGE ~~ [PEASF307]
+    SAY DYING ~~ [PEASF308]
+	SAY MORALE ~~ [PEASF309]
+  END
+  PATCH_IF selected = 61815 BEGIN
+	SAY DAMAGE ~~ [PEASM07]
+    SAY DYING ~~ [PEASM08]
+	SAY MORALE ~~ [PEASM09]
+  END
+  PATCH_IF selected = 61817 BEGIN
+	SAY DAMAGE ~~ [PEASM07]
+    SAY DYING ~~ [PEASM08]
+	SAY MORALE ~~ [PEASM09]
+  END
+  PATCH_IF selected = 61819 BEGIN
+	SAY DAMAGE ~~ [PEASM07]
+    SAY DYING ~~ [PEASM08]
+	SAY MORALE ~~ [PEASM09]
+  END
+  PATCH_IF selected = 61806 BEGIN
+	SAY DAMAGE ~~ [PEASM207]
+    SAY DYING ~~ [PEASM208]
+	SAY MORALE ~~ [PEASM209]
+  END
+  PATCH_IF selected = 61808 BEGIN
+	SAY DAMAGE ~~ [PEASM207]
+    SAY DYING ~~ [PEASM208]
+	SAY MORALE ~~ [PEASM209]
+  END
+  PATCH_IF selected = 618009 BEGIN
+	SAY DAMAGE ~~ [PEASM207]
+    SAY DYING ~~ [PEASM208]
+	SAY MORALE ~~ [PEASM209]
+  END
+  PATCH_IF selected = 61810 BEGIN
+	SAY DAMAGE ~~ [PEASM207]
+    SAY DYING ~~ [PEASM208]
+	SAY MORALE ~~ [PEASM209]
+  END
+  PATCH_IF selected = 61797 BEGIN
+	SAY DAMAGE ~~ [PEASM307]
+    SAY DYING ~~ [PEASM308]
+	SAY MORALE ~~ [PEASM309]
+  END
+  PATCH_IF selected = 61799 BEGIN
+	SAY DAMAGE ~~ [PEASM307]
+    SAY DYING ~~ [PEASM308]
+	SAY MORALE ~~ [PEASM309]
+  END
+  PATCH_IF selected = 61801 BEGIN
+	SAY DAMAGE ~~ [PEASM307]
+    SAY DYING ~~ [PEASM308]
+	SAY MORALE ~~ [PEASM309]
+  END
+  PATCH_IF selected = 60617 BEGIN
+	SAY DAMAGE ~~ [PHAERE05]
+    SAY DYING ~~ [PHAERE06]
+	SAY MORALE ~~ [PHAERE23]
+  END
+  PATCH_IF selected = 60269 BEGIN
+	SAY DAMAGE ~~ [PPAPHR04]
+    SAY DYING ~~ [PPAPHR05]
+  END
+  PATCH_IF selected = 60351 BEGIN
+	SAY DAMAGE ~~ [PPDILI04]
+    SAY DYING ~~ [PPDILI05]
+  END
+  PATCH_IF selected = 60355 BEGIN
+	SAY DAMAGE ~~ [PPDRAD04]
+    SAY DYING ~~ [PPDRAD05]
+  END
+  PATCH_IF selected = 60613 BEGIN
+	SAY DAMAGE ~~ [PPNALJ04]
+    SAY DYING ~~ [PPNALJ05]
+  END
+  PATCH_IF selected = 60671 BEGIN
+	SAY DAMAGE ~~ [PPSAEM05]
+    SAY DYING ~~ [PPSAEM06]
+  END
+  PATCH_IF selected = 60794 BEGIN
+	SAY DAMAGE ~~ [PPTIAX04]
+    SAY DYING ~~ [PPTIAX05]
+  END
+  PATCH_IF selected = 60835 BEGIN
+	SAY DAMAGE ~~ [PPWANE04]
+    SAY DYING ~~ [PPWANE05]
+  END
+  PATCH_IF selected = 60637 BEGIN
+	SAY MORALE ~~ [RAELIS34]
+  END
+  PATCH_IF selected = 60654 BEGIN
+	SAY DAMAGE ~~ [RENAL06]
+    SAY DYING ~~ [RENAL07]
+	SAY MORALE ~~ [RENAL25]
+  END
+  PATCH_IF selected = 5144 BEGIN
+	SAY DAMAGE ~~ [REVEN08]
+    SAY DYING ~~ [REVEN09]
+  END
+  PATCH_IF selected = 60240 BEGIN
+	SAY DAMAGE ~~ [RIBALD05]
+    SAY DYING ~~ [RIBALD06]
+  END
+  PATCH_IF selected = 60290 BEGIN
+	SAY DAMAGE ~~ [RIFTG05]
+    SAY DYING ~~ [RIFTG06]
+  END
+  PATCH_IF selected = 61901 BEGIN
+	SAY DAMAGE ~~ [RUFFIA06]
+    SAY DYING ~~ [RUFFIA07]
+	SAY MORALE ~~ [RUFFIA08]
+  END
+  PATCH_IF selected = 61904 BEGIN
+	SAY DAMAGE ~~ [RUFFIA06]
+    SAY DYING ~~ [RUFFIA07]
+	SAY MORALE ~~ [RUFFIA08]
+  END
+  PATCH_IF selected = 3708 BEGIN
+	SAY DAMAGE ~~ [SAFAN43]
+    SAY DYING ~~ [SAFAN46]
+  END
+  PATCH_IF selected = 60505 BEGIN
+	SAY DAMAGE ~~ [SAHKNG05]
+    SAY DYING ~~ [SAHKNG06]
+  END
+  PATCH_IF selected = 60713 BEGIN
+	SAY DAMAGE ~~ [SAHPR105]
+    SAY DYING ~~ [SAHPR106]
+  END
+  PATCH_IF selected = 60203 BEGIN
+	SAY DAMAGE ~~ [SAHPR205]
+    SAY DYING ~~ [SAHPR206]
+	SAY MORALE ~~ [SAHPR225]
+  END
+  PATCH_IF selected = 53744 BEGIN
+	SAY DAMAGE ~~ [SAINXX04]
+    SAY DYING ~~ [SAINXX05]
+  END
+  PATCH_IF selected = 73140 BEGIN
+	SAY DAMAGE ~~ [SARKIS04]
+    SAY DYING ~~ [SARKIS05]
+  END
+  PATCH_IF selected = 60692 BEGIN
+	SAY DAMAGE ~~ [SASSAR05]
+    SAY DYING ~~ [SASSAR06]
+	SAY MORALE ~~ [SASSAR25]
+  END
+  PATCH_IF selected = 60718 BEGIN
+	SAY DAMAGE ~~ [SHADEL06]
+  END
+  PATCH_IF selected = 60724 BEGIN
+	SAY DAMAGE ~~ [SILVER05]
+    SAY DYING ~~ [SILVER06]
+	SAY MORALE ~~ [SILVER22]
+  END
+  PATCH_IF selected = 60743 BEGIN
+	SAY DAMAGE ~~ [SIMYAZ05]
+    SAY DYING ~~ [SIMYAZ06]
+	SAY MORALE ~~ [SIMYAZ28]
+  END
+  PATCH_IF selected = 5176 BEGIN
+	SAY DAMAGE ~~ [SIRIN08]
+        SAY DYING ~~ [SIRIN09]
+	SAY MORALE ~~ [SIRIN13]
+  END
+  PATCH_IF selected = 4857 BEGIN
+	SAY DAMAGE ~~ [SLAVE05]
+        SAY DYING ~~ [SLAVE06]
+  END
+  PATCH_IF selected = 73121 BEGIN
+	SAY DAMAGE ~~ [SOLAR04]
+        SAY DYING ~~ [SOLAR05]
+  END
+  PATCH_IF selected = 61870 BEGIN
+	SAY DAMAGE ~~ [SOLF06]
+	SAY DYING ~~ [SOLF07]
+	SAY MORALE ~~ [SOLF08]
+  END
+  PATCH_IF selected = 61871 BEGIN
+	SAY DAMAGE ~~ [SOLF06]
+	SAY DYING ~~ [SOLF07]
+	SAY MORALE ~~ [SOLF08]
+  END
+  PATCH_IF selected = 61862 BEGIN
+	SAY DAMAGE ~~ [SOLM06]
+	SAY DYING ~~ [SOLM07]
+	SAY MORALE ~~ [SOLM08]
+  END
+  PATCH_IF selected = 61863 BEGIN
+	SAY DAMAGE ~~ [SOLM06]
+	SAY DYING ~~ [SOLM07]
+	SAY MORALE ~~ [SOLM08]
+  END
+  PATCH_IF selected = 61891 BEGIN
+	SAY DAMAGE ~~ [STHFE07]
+	SAY DYING ~~ [STHFE08]
+	SAY MORALE ~~ [STHFE09]
+  END
+  PATCH_IF selected = 61892 BEGIN
+	SAY DAMAGE ~~ [STHFE07]
+	SAY DYING ~~ [STHFE08]
+	SAY MORALE ~~ [STHFE09]
+  END
+  PATCH_IF selected = 61882 BEGIN
+	SAY DAMAGE ~~ [STHMA07]
+	SAY DYING ~~ [STHMA08]
+	SAY MORALE ~~ [STHMA09]
+  END
+  PATCH_IF selected = 4881 BEGIN
+	SAY DAMAGE ~~ [STORE05]
+	SAY DYING ~~ [STORE06]
+  END
+  PATCH_IF selected = 38762 BEGIN
+	SAY DAMAGE ~~ [SUAVAT05]
+	SAY DYING ~~ [SUAVAT06]
+  END
+  PATCH_IF selected = 4865 BEGIN
+	SAY DAMAGE ~~ [SWENC05]
+	SAY DYING ~~ [SWENC06]
+  END
+  PATCH_IF selected = 60160 BEGIN
+	SAY DAMAGE ~~ [TANNER04]
+	SAY MORALE ~~ [TANNER20]
+  END
+  PATCH_IF selected = 55320 BEGIN
+	SAY DAMAGE ~~ [TELWYN04]
+	SAY DYING ~~ [TELWYN05]
+	SAY MORALE ~~ [TELWYN20]
+	SAY UNHAPPY_BREAKING_POINT ~~ [TELWYN16]
+  END
+  PATCH_IF selected = 59018 BEGIN
+	SAY MORALE ~~ [TEOSXX20]
+  END
+  PATCH_IF selected = 60030 BEGIN
+	SAY DAMAGE ~~ [TERMIN04]
+	SAY DYING ~~ [TERMIN05]
+	SAY SELECT_COMMON2 ~~ [TERMIN09]
+	SAY SELECT_COMMON3 ~~ [TERMIN10]
+	SAY UNHAPPY_BREAKING_POINT ~~ [TERMIN17]
+  END
+  PATCH_IF selected = 4600 BEGIN
+	SAY DAMAGE ~~ [TETHT03]
+	SAY DYING ~~ [TETHT04]
+  END
+  PATCH_IF selected = 59978 BEGIN
+	SAY DAMAGE ~~ [THADDI04]
+	SAY DYING ~~ [THADDI05]
+	SAY MORALE ~~ [THADDI20]
+  END
+  PATCH_IF selected = 60246 BEGIN
+	SAY DAMAGE ~~ [THUMB06]
+        SAY DYING ~~ [THUMB05]
+  END
+  PATCH_IF selected = 60798 BEGIN
+	SAY DAMAGE ~~ [TOGAL06]
+	SAY DYING ~~ [TOGAL07]
+  END
+  PATCH_IF selected = 4800 BEGIN
+	SAY DAMAGE ~~ [TOWNC03]
+	SAY DYING ~~ [TOWNC04]
+  END
+  PATCH_IF selected = 60527 BEGIN
+	SAY DAMAGE ~~ [TRGENI05]
+	SAY DYING ~~ [TRGENI06]
+	SAY MORALE ~~ [TRGENI25]
+  END
+  PATCH_IF selected = 60760 BEGIN
+	SAY DAMAGE ~~ [UDSOLA05]
+	SAY DYING ~~ [UDSOLA06]
+	SAY MORALE ~~ [UDSOLA28]
+  END
+  PATCH_IF selected = 61758 BEGIN
+	SAY DAMAGE ~~ [UNEARF06]
+	SAY DYING ~~ [UNEARF07]
+	SAY MORALE ~~ [UNEARF08]
+  END
+  PATCH_IF selected = 61761 BEGIN
+	SAY DAMAGE ~~ [UNEARF06]
+	SAY DYING ~~ [UNEARF07]
+	SAY MORALE ~~ [UNEARF08]
+  END
+  PATCH_IF selected = 61750 BEGIN
+	SAY DAMAGE ~~ [UNEARM06]
+	SAY DYING ~~ [UNEARM07]
+	SAY MORALE ~~ [UNEARM08]
+  END
+  PATCH_IF selected = 60224 BEGIN
+	SAY DAMAGE ~~ [VALENX04]
+	SAY DYING ~~ [VALENX05]
+	SAY MORALE ~~ [VALENX28]
+  END
+  PATCH_IF selected = 61741 BEGIN
+	SAY DAMAGE ~~ [VAMPFX07]
+	SAY DYING ~~ [VAMPFX08]
+	SAY MORALE ~~ [VAMPFX09]
+  END
+  PATCH_IF selected = 61709 BEGIN
+	SAY DAMAGE ~~ [VAMPM07]
+	SAY DYING ~~ [VAMPM08]
+	SAY MORALE ~~ [VAMPM09]
+  END
+  PATCH_IF selected = 4522 BEGIN
+	SAY DAMAGE ~~ [VOLOO08]
+    SAY DYING ~~ [VOLOO09]
+  END
+  PATCH_IF selected = 11165 BEGIN
+	SAY SELECT_COMMON2 ~~ [WOMLC02]
+	SAY DAMAGE ~~ [WOMLC03]
+	SAY DYING ~~ [WOMLC04]
+  END
+  PATCH_IF selected = 53727 BEGIN
+	SAY DAMAGE ~~ [YARRYL04]
+	SAY DYING ~~ [YARRYL05]
+  END
+BUT_ONLY
+
+<<<<<<<< .../arestorationp/inlined/restorestring.2da
+11626  rielev07
+11556  rielev02
+37848  rielev06
+11842  rielev06
+11785  rielev08
+>>>>>>>>
+<<<<<<<< .../arestorationp/inlined/restorestring.tpa
+>>>>>>>>
+ACTION_IF (~%LANGUAGE%~ STR_EQ ~Polski~) THEN BEGIN
+COPY ~.../arestorationp/inlined/restorestring.tpa~ ~override~
+COPY - ~.../arestorationp/inlined/restorestring.2da~ ~.../arestorationp/inlined/restorestring.2da~
+     READ_2DA_ENTRIES_NOW ~string_entries~ 2
+     FOR (i=0;i<~string_entries~;i=i+1) BEGIN
+        READ_2DA_ENTRY_FORMER ~string_entries~ i 0 ~stringnum~
+        READ_2DA_ENTRY_FORMER ~string_entries~ i 1 ~wavfile~
+        GET_STRREF ~stringnum~ ~stringtext~
+        INNER_ACTION BEGIN
+           APPEND_OUTER ~override/restorestring.tpa~ ~STRING_SET %stringnum% "%stringtext%" [%wavfile%]~
+        END
+     END
+
+REINCLUDE ~override/restorestring.tpa~
+END
+
+BEGIN @500
+COPY_EXISTING bolt08.itm override
+WRITE_LONG 0x0034 10000
+WRITE_LONG 0x0060 3
+ACTION_FOR_EACH store IN ~temlath~ ~suelf10~ ~slilmat~ ~wilmat~ ~dawnmas~ BEGIN
+ACTION_IF FILE_EXISTS_IN_GAME ~%store%.sto~ BEGIN
+COPY_EXISTING ~%store%.sto~ override
+ADD_STORE_ITEM ~bolt08~ #0 #0 #0 ~IDENTIFIED&UNSTEALABLE~ #1
+END
+END
+
+OUTER_FOR (x = 0; x < 3; x += 1)
+BEGIN
+COPY_EXISTING ~ar2018.are~ ~override~
+	SET ~container_to_add_to~ = 1
+	SPRINT ~item_to_add~ ~POTN15~
+	SET ~charges1~ = 0
+	SET ~charges2~ = 0
+	SET ~charges3~ = 0
+	LPM ~ADD_AREA_ITEM~
+	BUT_ONLY
+END
+
+OUTER_FOR (x = 0; x < 3; x += 1)
+BEGIN
+COPY_EXISTING ~ar2018.are~ ~override~
+	SET ~container_to_add_to~ = 1
+	SPRINT ~item_to_add~ ~POTN16~
+	SET ~charges1~ = 0
+	SET ~charges2~ = 0
+	SET ~charges3~ = 0
+	LPM ~ADD_AREA_ITEM~
+	BUT_ONLY
+END
+
+COPY_EXISTING ~viekang.cre~ override
+ADD_CRE_ITEM ~boot08~ #0 #0 #0 ~IDENTIFIED~ ~INV~
+COPY_EXISTING ~sarvie01.cre~ override
+ADD_CRE_ITEM ~boot08~ #0 #0 #0 ~IDENTIFIED~ ~INV~
+COPY_EXISTING ~habib.cre~ override
+ADD_CRE_ITEM ~boot10~ #0 #0 #0 ~IDENTIFIED~ ~INV~
+COPY_EXISTING ~habib2.cre~ override
+ADD_CRE_ITEM ~boot10~ #0 #0 #0 ~IDENTIFIED~ ~INV~
+
+ACTION_IF FILE_EXISTS_IN_GAME ~boot10.itm~ BEGIN
+COPY_EXISTING ~boot10.itm~ ~override~
+SET opcode_to_delete = 1
+LPM DELETE_ITEM_EFFECT
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~boot10.itm~ BEGIN
+COPY_EXISTING ~boot10.itm~ ~override~
+SET opcode = 1
+SET target = 1
+SET timing = 2
+SET parameter1 = 6
+SET parameter2 = 1
+SET probability2 = 0
+SET probability1 = 0
+SET savingthrow = 0
+SET savebonus = 0
+SET resist_dispel = 2
+LPM ADD_ITEM_EFFECT
+END
+COPY_EXISTING ~palkni05.cre~ override
+ADD_CRE_ITEM ~misc6r~ #0 #0 #0 ~NONE~ ~INV~
+COPY_EXISTING ~amsi.cre~ override
+ADD_CRE_ITEM ~misc5i~ #0 #0 #0 ~NONE~ ~INV~
+EXTEND_TOP ~camitis.bcs~ ~arestorationp/baf/camitis.baf~
+
+COPY_EXISTING ar0500.are override
+LPF ALTER_AREA_DOOR
+STR_VAR
+door_name = "door0507"
+door_key = "misc5i"
+END
+BUT_ONLY
+
+BEGIN @600
+COPY_EXISTING ~wish.2da~ ~override~
+SET_2DA_ENTRY 27 4 2 ~38~
+SET_2DA_ENTRY 28 1 2 ~39~
+COMPILE ~arestorationp/dlg/wish25.d~
+
+BEGIN @700
+COMPILE ~arestorationp/dlg/yagcon.d~
+COMPILE ~arestorationp/dlg/head1.d~
+COMPILE ~arestorationp/dlg/amsmith.d~
+
+BEGIN @800
+COMPILE ~arestorationp/baf/cedelich.baf~
+COPY_EXISTING ~grvlch01.cre~ ~override/cedelich.cre~
+WRITE_LONG 0x0014 26000
+WRITE_SHORT 0x0024 96
+WRITE_SHORT 0x0026 96
+WRITE_SHORT 0x0046 0
+WRITE_ASCII 0x0248 ~cedelich~ #8
+WRITE_ASCII 0x0250 ~initdlg~ #8
+WRITE_ASCII 0x0258 ~zilmag01~ #8
+WRITE_ASCII 0x0280 ~cedelich~ #32
+WRITE_ASCII 0x02cc ~cedelich~ #8
+REMOVE_CRE_ITEM rods05 ring05 wand05
+ADD_CRE_ITEM ~minhp20~ #0 #0 #0 ~UNDROPPABLE~ ~AMULET~
+ADD_CRE_ITEM ~staf01~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON~
+ADD_CRE_ITEM ~MISC73~ #30 #0 #0 ~IDENTIFIED~ ~INV~
+SAY NAME1 #15145
+SAY NAME2 #15147
+
+COMPILE ~arestorationp/dlg/cedelich.d~
+
+EXTEND_BOTTOM ~ar1004.bcs~ ~arestorationp/baf/ar1004.baf~
+
+EXTEND_BOTTOM ~cernd.bcs~ ~arestorationp/baf/cernd.baf~ EVALUATE_BUFFER
+
+BEGIN @900
+COMPILE ~arestorationp/baf/l-ar01.baf~
+COPY_EXISTING ~ar0044.are~ ~override/l-ar01.are~
+	WRITE_ASCII 0x0094 ~l-ar01~ #8
+	APPEND ~MASTAREA.2da~ ~L-AR01 value~
+    OUTER_SET area_length = 0xf0
+    OUTER_SET link_length = 0xd8
+    OUTER_SPRINT encounter_area l-ar01
+    OUTER_SET encounter_probability = 33
+
+    COPY_EXISTING "%wmp_name_ToB%.wmp" override
+    READ_LONG 0x30 area_count
+    READ_LONG 0x34 area_offset
+    READ_LONG 0x38 link_offset
+    READ_LONG 0x3c link_count
+    FOR (i = 0; i < area_count; ++i) BEGIN
+    current_area_offset = area_offset + i * area_length
+    READ_ASCII current_area_offset area_name
+    PATCH_IF "%area_name%" STR_EQ ar5500 BEGIN
+    PATCH_FOR_EACH node IN 3 2 1 BEGIN
+    READ_LONG current_area_offset + 0x50 + node * 0x8 link_index
+    READ_LONG current_area_offset + 0x54 + node * 0x8 link_count
+    FOR (j = 0; j < link_count; ++j) BEGIN
+    current_link_offset = link_offset + (link_index + j) * link_length
+    WRITE_ASCIIE current_link_offset + 0x2c "%encounter_area%" #8
+    WRITE_LONG current_link_offset + 0x54 encounter_probability
+    END
+    END
+    i = area_count
+    END
+    END
+    BUT_ONLY
+
+    OUTER_SET area_length = 0xf0
+    OUTER_SET link_length = 0xd8
+    OUTER_SPRINT encounter_area l-ar01
+    OUTER_SET encounter_probability = 33
+
+    COPY_EXISTING "%wmp_name_ToB%.wmp" override
+    READ_LONG 0x30 area_count
+    READ_LONG 0x34 area_offset
+    READ_LONG 0x38 link_offset
+    READ_LONG 0x3c link_count
+    FOR (i = 0; i < area_count; ++i) BEGIN
+    current_area_offset = area_offset + i * area_length
+    READ_ASCII current_area_offset area_name
+    PATCH_IF "%area_name%" STR_EQ ar6000 BEGIN
+    PATCH_FOR_EACH node IN 3 2 1 BEGIN
+    READ_LONG current_area_offset + 0x50 + node * 0x8 link_index
+    READ_LONG current_area_offset + 0x54 + node * 0x8 link_count
+    FOR (j = 0; j < link_count; ++j) BEGIN
+    current_link_offset = link_offset + (link_index + j) * link_length
+    WRITE_ASCIIE current_link_offset + 0x2c "%encounter_area%" #8
+    WRITE_LONG current_link_offset + 0x54 encounter_probability
+    END
+    END
+    i = area_count
+    END
+    END
+    BUT_ONLY
+
+    OUTER_SET area_length = 0xf0
+    OUTER_SET link_length = 0xd8
+    OUTER_SPRINT encounter_area l-ar01
+    OUTER_SET encounter_probability = 33
+
+    COPY_EXISTING "%wmp_name_ToB%.wmp" override
+    READ_LONG 0x30 area_count
+    READ_LONG 0x34 area_offset
+    READ_LONG 0x38 link_offset
+    READ_LONG 0x3c link_count
+    FOR (i = 0; i < area_count; ++i) BEGIN
+    current_area_offset = area_offset + i * area_length
+    READ_ASCII current_area_offset area_name
+    PATCH_IF "%area_name%" STR_EQ ar6100 BEGIN
+    PATCH_FOR_EACH node IN 3 2 1 BEGIN
+    READ_LONG current_area_offset + 0x50 + node * 0x8 link_index
+    READ_LONG current_area_offset + 0x54 + node * 0x8 link_count
+    FOR (j = 0; j < link_count; ++j) BEGIN
+    current_link_offset = link_offset + (link_index + j) * link_length
+    WRITE_ASCIIE current_link_offset + 0x2c "%encounter_area%" #8
+    WRITE_LONG current_link_offset + 0x54 encounter_probability
+    END
+    END
+    i = area_count
+    END
+    END
+    BUT_ONLY
+
+ACTION_IF GAME_IS ~bg2ee eet~ BEGIN
+EXTEND_BOTTOM ~l-ar01.bcs~ ~arestorationp/baf/l-eextr.baf~
+END ELSE BEGIN
+EXTEND_BOTTOM ~l-ar01.bcs~ ~arestorationp/baf/l-extra.baf~
+END
+
+COPY_EXISTING ~tobpar01.cre~ override
+WRITE_ASCII 0x2cc ~tobpar01~ #8
+WRITE_ASCII 0x248 ~initdlg~ #8
+
+COPY_EXISTING ~tobpar06.cre~ override
+WRITE_ASCII 0x268 ~CFIGH20A~ #8
+
+ACTION_IF MOD_IS_INSTALLED "SETUP-d0questpack.TP2" "4" AND FILE_EXISTS ~dir.ids~ 
+BEGIN OUTER_SPRINT wold "arestorationp/baf/wilderness_d0_ee.baf" END ELSE
+ACTION_IF MOD_IS_INSTALLED "SETUP-STRATAGEMS.TP2" "8050" AND FILE_EXISTS ~dir.ids~ 
+BEGIN OUTER_SPRINT wold "arestorationp/baf/wilderness_scs2_ee.baf" END ELSE
+ACTION_IF FILE_EXISTS ~dir.ids~ 
+BEGIN OUTER_SPRINT wold "arestorationp/baf/wilderness_ee.baf" END ELSE
+ACTION_IF MOD_IS_INSTALLED "SETUP-d0questpack.TP2" "4" AND NOT FILE_EXISTS ~dir.ids~
+BEGIN OUTER_SPRINT wold "arestorationp/baf/wilderness_d0.baf" END ELSE
+ACTION_IF MOD_IS_INSTALLED "SETUP-STRATAGEMS.TP2" "8050" AND NOT FILE_EXISTS ~dir.ids~
+BEGIN OUTER_SPRINT wold "arestorationp/baf/wilderness_scs2.baf" END ELSE
+BEGIN OUTER_SPRINT wold "arestorationp/baf/wilderness_original.baf" END
+OUTER_SPRINT wnew "arestorationp/baf/wilderness_arp.baf"
+
+COPY - "%wold%" "%wold%"
+       "%wnew%" "%wnew%"
+  EVAL
+
+  COPY_EXISTING "ar0042.bcs" override
+ R_B_B EVALUATE_BUFFER "%wold%" "%wnew%"
+  COPY_EXISTING "ar0043.bcs" override
+ R_B_B EVALUATE_BUFFER "%wold%" "%wnew%"
+  COPY_EXISTING "ar0044.bcs" override
+ R_B_B EVALUATE_BUFFER "%wold%" "%wnew%"
+
+BEGIN @1000
+COPY_EXISTING ~ar4000.are~ ~override/L-SAR1.are~
+
+APPEND ~MASTAREA.2da~ ~L-SAR1 value~
+ACTION_IF GAME_IS ~eet~ BEGIN
+	OUTER_SET mapIconVar = 102
+END ELSE BEGIN
+	OUTER_SET mapIconVar = 17
+END
+ACTION_GET_STRREF 70658 SarName
+LAF sc#addWmpAre
+  INT_VAR
+    mapIcon = mapIconVar
+    xCoord = 272 + wmp_xCoordAdd_ToB
+    yCoord = 128 + wmp_yCoordAdd_ToB
+    tTime = 3
+    inclSv = 0
+    reachable = 0
+    visited = 0
+    visible = 0
+    visibleAdjacent = 0
+  STR_VAR
+    areName = ~L-SAR1~
+    strName = EVAL "%SarName%"
+    strDesc = EVAL "%SarName%"
+    worldmap = EVAL "%wmp_name_ToB%"
+RET areNum = areNum END
+
+EXTEND_BOTTOM ~ar5203.bcs~ ~arestorationp/baf/ar5203.baf~
+
+COPY_EXISTING ~spcl321.spl~ override
+LPF ALTER_SPELL_HEADER
+STR_VAR icon = "enrageb"
+END
+BUT_ONLY
+
+COPY_EXISTING ~spcl815.spl~ override
+LPF ALTER_SPELL_HEADER
+STR_VAR icon = "spin109"
+END
+BUT_ONLY
+
+COPY_EXISTING ~spcl633.spl~ override
+LPF ALTER_SPELL_HEADER
+STR_VAR icon = "spcl626b"
+END
+BUT_ONLY
+
+COPY_EXISTING ~spcl311.spl~ override
+LPF ALTER_SPELL_HEADER
+STR_VAR icon = "spcl641b"
+END
+BUT_ONLY
+
+APPEND ~tracking.2da~
+~AR5000	O_72721
+AR5001	O_72721
+AR5002	O_72721
+AR5003	O_72721
+AR5004	O_72721
+AR5005	O_72721
+AR5008	O_72721
+AR5009	O_72721
+AR5010	O_72721
+AR5011	O_72721
+AR5012	O_72721
+AR5014	O_72721
+AR5015	O_72721
+AR5016	O_72721
+AR5500	O_72721
+AR5501	O_72721
+AR5502	O_72721
+AR5503	O_72721
+AR5504	O_72721
+AR5505	O_72721
+AR5506	O_72721
+AR5507	O_72721
+AR5508	O_72721
+AR4500	O_72749~
+
+COPY_EXISTING ~glbear.cre~ override
+SAY NAME1 #6626
+SAY NAME2 #6626
+WRITE_LONG 0x28 0x7200
+
+COPY ~arestorationp/spleff~ override
+COPY_EXISTING ~cut241a.bcs~ override
+DECOMPILE_AND_PATCH BEGIN
+REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~FadeToColor([30.0],0)~ ~FadeToColor([30.0],0)
+ApplySpellRES("L-DISG1",Myself)
+ActionOverride(Player2,ApplySpellRES("L-DISG1",Myself))
+ActionOverride(Player3,ApplySpellRES("L-DISG1",Myself))
+ActionOverride(Player4,ApplySpellRES("L-DISG1",Myself))
+ActionOverride(Player5,ApplySpellRES("L-DISG1",Myself))
+ActionOverride(Player6,ApplySpellRES("L-DISG1",Myself))~
+END
+COPY_EXISTING ~cut241b.bcs~ override
+DECOMPILE_AND_PATCH BEGIN
+REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~ActionOverride("cutamgrd",DestroySelf())~ ~ActionOverride("cutamgrd",DestroySelf())
+ApplySpellRES("L-DISG2",Myself)
+ActionOverride(Player2,ApplySpellRES("L-DISG2",Myself))
+ActionOverride(Player3,ApplySpellRES("L-DISG2",Myself))
+ActionOverride(Player4,ApplySpellRES("L-DISG2",Myself))
+ActionOverride(Player5,ApplySpellRES("L-DISG2",Myself))
+ActionOverride(Player6,ApplySpellRES("L-DISG2",Myself))~
+END
+COMPILE ~arestorationp/dlg/amsaemon.d~
+COMPILE ~arestorationp/dlg/ammonk03.d~
+ADD_JOURNAL #67722 #67723
+
+COPY_EXISTING ~cut32k.bcs~ override
+DECOMPILE_AND_PATCH BEGIN
+REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~SetGlobalTimer("KPPlotTime","GLOBAL",300)~ ~SetGlobalTimer("KPPlotTime","GLOBAL",90)~
+END
+
+COPY_EXISTING ~cut32l.bcs~ override
+DECOMPILE_AND_PATCH BEGIN
+REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~SetGlobal("KeepPlot","GLOBAL",12)~ ~SetGlobal("KeepPlot","GLOBAL",12)
+DisplayStringHead(Myself,40135)
+Wait(6)~
+END
+
+COPY_EXISTING ~cut32m.bcs~ override
+DECOMPILE_AND_PATCH BEGIN
+REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~SetGlobal("KeepPlot","GLOBAL",13)~ ~SetGlobal("KeepPlot","GLOBAL",13)
+DisplayStringHead(Myself,40099)
+Wait(6)~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~slayerw3.itm~ BEGIN
+COPY_EXISTING slayerw3.itm override
+LPF ALTER_ITEM_EFFECT
+INT_VAR
+check_globals = 1
+match_opcode = 18
+parameter2 = 3
+END
+BUT_ONLY
+END
+
+BEGIN ~~
+DEPRECATED @1100
+
+BEGIN @1200
+REQUIRE_PREDICATE NOT GAME_IS ~bg2ee eet~ @1201
+COPY_EXISTING ~ar0602.bcs~ ~override~
+  DECOMPILE_AND_PATCH BEGIN
+    REPLACE_TEXTUALLY ~ActionOverride("Malaaq",MoveBetweenAreas("AR0601",\[345\.591\],SE))~ ~ActionOverride("Malaaq",TakeItemListPartyNum("IMPORT02",1))~
+  END
+	
+COPY_EXISTING ~idemon01.cre~ ~override~
+              ~idemon02.cre~ ~override~
+  REMOVE_CRE_ITEM ~sw1h01~ ~sw1h02~ ~sw2h16~
+  ADD_CRE_ITEM ~sw2h16~ #0 #0 #0 ~NONE~ ~WEAPON1~ EQUIP TWOHANDED
+	
+COPY_EXISTING ~idjinni.cre~ ~override~
+  REMOVE_CRE_ITEM ~sw2h16~
+  ADD_CRE_ITEM ~sw2h16~ #0 #0 #0 ~IDENTIFIED~ ~INV1~
+  WRITE_ASCII 0x250 l-import #8
+
+COPY_EXISTING ~ribald.cre~ ~override~
+  REMOVE_CRE_ITEM ~sw1h06~ ~sw1h41~
+  ADD_CRE_ITEM ~sw1h06~ #0 #0 #0 ~NONE~ ~WEAPON1~ EQUIP
+
+COPY_EXISTING ~ax1h07.itm~ ~override~
+  WRITE_SHORT 0x42 40
+	
+OUTER_FOR (index = 4 ; index >= 0 ; --index) BEGIN
+  EXTEND_BOTTOM ~l-import.bcs~ ~arestorationp/import02/l-import_middle.baf~ EVALUATE_BUFFER
+END
+EXTEND_BOTTOM ~l-import.bcs~ ~arestorationp/import02/l-import_middle.baf~ EVALUATE_BUFFER
+
+COPY_EXISTING ~ribald.sto~ ~override~
+  ADD_STORE_ITEM ~halb07~ AFTER ~halb03~ #1 #0 #0 ~IDENTIFIED~ #1
+	
+EXTEND_BOTTOM ~ar0204.bcs~   ~arestorationp/import02/ar0204.baf~
+EXTEND_BOTTOM ~ar0413.bcs~   ~arestorationp/import02/ar0413.baf~
+EXTEND_BOTTOM ~ar1401.bcs~   ~arestorationp/import02/ar1401.baf~
+EXTEND_BOTTOM ~ribald.bcs~   ~arestorationp/import02/ribald.baf~
+
+COPY_EXISTING ~ar0413.are~ ~override~
+  LPF fj_are_structure INT_VAR fj_con_itm_idx = 0 STR_VAR fj_name = AX1H02 fj_structure_type = itm END
+  LPF fj_are_structure INT_VAR fj_con_itm_idx = 0 STR_VAR fj_name = AX1H07 fj_structure_type = itm END
+
+COPY_EXISTING ~ar0204.are~ ~override~
+  LPF fj_are_structure INT_VAR fj_con_itm_idx = 2 STR_VAR fj_name = hamm08 fj_structure_type = itm END
+
+COPY_EXISTING ~ar1401.are~ ~override~
+  LPF fj_are_structure INT_VAR fj_con_itm_idx = 2 STR_VAR fj_name = slng10 fj_structure_type = itm END
+
+BEGIN @1300
+EXTEND_BOTTOM ~player1d.bcs~ ~arestorationp/baf/player1d.baf~
+EXTEND_BOTTOM ~ar2700.bcs~ ~arestorationp/baf/ar2700.baf~
+
+COPY_EXISTING ~ar2700.are~ override
+LPF fj_are_structure
+INT_VAR
+fj_loc_x = 1348
+fj_loc_y = 2641
+fj_orientation = 0
+STR_VAR
+fj_structure_type = entrance
+fj_name = L-Exit
+END
+COPY_EXISTING ~AR2600.are~ ~override~
+LPF fj_are_structure
+INT_VAR
+fj_loc_x = 3288
+fj_loc_y = 29
+fj_orientation = 0
+STR_VAR
+fj_structure_type = entrance
+fj_name = L-Exit
+END
+COPY_EXISTING ~AR2500.are~ ~override~
+LPF fj_are_structure
+INT_VAR
+fj_loc_x = 3035
+fj_loc_y = 832
+fj_orientation = 0
+STR_VAR
+fj_structure_type = entrance
+fj_name = L-Exit
+END
+COPY_EXISTING ~AR1700.are~ ~override~
+LPF fj_are_structure
+INT_VAR
+fj_loc_x = 591
+fj_loc_y = 3103
+fj_orientation = 0
+STR_VAR
+fj_structure_type = entrance
+fj_name = L-Exit
+END
+COPY_EXISTING ~AR1800.are~ ~override~
+LPF fj_are_structure
+INT_VAR
+fj_loc_x = 42
+fj_loc_y = 1430
+fj_orientation = 0
+STR_VAR
+fj_structure_type = entrance
+fj_name = L-Exit
+END
+
+ACTION_DEFINE_ASSOCIATIVE_ARRAY toNewArea BEGIN
+  "AR2600" => "L-Exit"
+  "AR2500" => "L-Exit"
+  "AR1700" => "L-Exit"
+  "AR1800" => "L-Exit"
+  "AR2000" => "L-Exit"
+  "AR1304" => "L-Exit"
+  "AR1404" => "L-Exit"
+  "AR0020" => "L-Exit"
+  "AR1300" => "L-Exit"
+  "AR1400" => "L-Exit"
+  "AR1200" => "L-Exit"
+  "AR1100" => "L-Exit"
+  "AR0300" => "L-Exit"
+  "AR0400" => "L-Exit"
+  "AR0500" => "L-Exit"
+  "AR0700" => "L-Exit"
+  "AR0800" => "L-Exit"
+  "AR0900" => "L-Exit"
+  "AR1000" => "L-Exit"
+END
+
+ACTION_DEFINE_ASSOCIATIVE_ARRAY fromNewArea BEGIN
+  "AR2600" => "L-Exit"
+  "AR2500" => "L-Exit"
+  "AR1700" => "L-Exit"
+  "AR1800" => "L-Exit"
+  "AR2000" => "ExitNW"
+  "AR1304" => "ExitSE"
+  "AR1404" => "ExitE"
+  "AR0020" => "ExitNE"
+  "AR1300" => "ExitSE"
+  "AR1400" => "ExitE"
+  "AR1200" => "ExitW"
+  "AR1100" => "ExitSE"
+  "AR0300" => "ExitNE"
+  "AR0400" => "ExitSE"
+  "AR0500" => "ExitNE"
+  "AR0700" => "ExitS"
+  "AR0800" => "ExitS"
+  "AR0900" => "ExitNW"
+  "AR1000" => "ExitNE"
+END
+ACTION_GET_STRREF 61301 GrovName
+LAF sc#addWmpAre
+  INT_VAR
+    mapIcon = 16
+    xCoord = 1095 + wmp_xCoordAdd_SoA
+    yCoord = 660 + wmp_yCoordAdd_SoA
+    tTime = 2
+    inclSv = 0
+    visible = 0
+    reachable = 1
+    visited = 0
+    visibleAdjacent = 0
+  STR_VAR
+    areName = ~ar2700~
+    strName = EVAL "%GrovName%"
+    strDesc = EVAL "%GrovName%"
+    worldmap = "worldmap"
+RET areNum = areNum END
+
+ BEGIN @1400
+ REQUIRE_COMPONENT "setup-arestorationp.tp2" "11" ~Requires the previous component.~
+ COMPILE ~arestorationp/dlg/player1.d~
+ EXTEND_TOP ~ar4000.bcs~ ~arestorationp/baf/ar4000.baf~
+
+ BEGIN @1500
+ COMPILE ~arestorationp/baf/cut01a.baf~
+COMPILE ~arestorationp/baf/cut01c.baf~
+COMPILE ~arestorationp/baf/cut01e.baf~

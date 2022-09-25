@@ -1,0 +1,21 @@
+IF
+GlobalGT("Chapter","GLOBAL",%bg2_chapter_4%)
+Gender(Player1,MALE)
+Global("L-ViconiaBanter","GLOBAL",0)
+InParty(Myself)
+THEN
+RESPONSE #100
+RealSetGlobalTimer("L-ViconiaBanterTimer","GLOBAL",3000)
+SetGlobal("L-ViconiaBanter","GLOBAL",1)
+END
+
+IF
+RealGlobalTimerExpired("L-ViconiaBanterTimer","GLOBAL")
+Global("L-ViconiaBanter","GLOBAL",1)
+InParty(Myself)
+See(Player1)
+!StateCheck(Player1,STATE_SLEEPING)
+THEN
+RESPONSE #100
+Interact(Player1)
+END
