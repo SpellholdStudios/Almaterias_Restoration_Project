@@ -1,7 +1,7 @@
 BACKUP ~arestorationp/backup~
 //AUTHOR 
 SUPPORT ~http://www.shsforums.net/forum/658-almaterias-restoration-project/~
-VERSION ~v9~
+VERSION ~v9.1~
 README "arestorationp/language/%LANGUAGE%/readme.arp.html" "arestorationp/language/english/readme.arp.html"
 AUTO_TRA ~arestorationp/language/%s~
 //%
@@ -2543,10 +2543,19 @@ BEGIN @1200
 LABEL Almaterias_Restoration_Project-Better_Item_Import
 REQUIRE_PREDICATE NOT GAME_IS ~bg2ee eet~ @1201
 COPY_EXISTING ~ar0602.bcs~ ~override~
-  DECOMPILE_AND_PATCH BEGIN
-    REPLACE_TEXTUALLY ~ActionOverride("Malaaq",MoveBetweenAreas("AR0601",\[345\.591\],SE))~ ~\1 
-	ActionOverride("Malaaq",TakeItemListPartyNum("IMPORT02",1))~
-  END
+    DECOMPILE_AND_PATCH BEGIN
+        SPRINT textToReplace ~\(ActionOverride("Malaaq",MoveBetweenAreas("AR0601",\[345\.591\],14))\)~
+        COUNT_REGEXP_INSTANCES ~%textToReplace%~ num_matches
+        PATCH_IF (num_matches > 0) BEGIN
+            REPLACE_TEXTUALLY ~%textToReplace%~ ~\1
+    ActionOverride("Malaaq",TakeItemListPartyNum("IMPORT02",1))~
+            PATCH_PRINT ~Patching: %num_matches% matches found in %SOURCE_FILESPEC% for REPLACE_TEXTUALLY: %textToReplace%~
+        END ELSE BEGIN
+            PATCH_WARN ~WARNING: could not find %textToReplace% in %SOURCE_FILESPEC%~
+        END
+    END
+BUT_ONLY
+
 /*	
 COPY_EXISTING ~idemon01.cre~ ~override~
               ~idemon02.cre~ ~override~
