@@ -1,7 +1,7 @@
 BACKUP ~arestorationp/backup~
 //AUTHOR 
 SUPPORT ~http://www.shsforums.net/forum/658-almaterias-restoration-project/~
-VERSION ~v9.1~
+VERSION ~v10.0~
 README "arestorationp/language/%LANGUAGE%/readme.arp.html" "arestorationp/language/english/readme.arp.html"
 AUTO_TRA ~arestorationp/language/%s~
 //%
@@ -43,6 +43,7 @@ ALWAYS
     german => cp1252
     ptbr => cp1252
     czech => CP1250
+    spanish => cp1252
   END
   LAF HANDLE_CHARSETS
     INT_VAR
@@ -125,6 +126,12 @@ LANGUAGE ~Czech (by Radim "Edvin" Klimek)~
          ~arestorationp/language/czech/setup.tra~
          ~arestorationp/language/czech/game.tra~
          ~arestorationp/language/czech/setup.tra~
+LANGUAGE ~Spanish (by Memnoch)~
+		~spanish~
+         ~arestorationp/language/spanish/game.tra~
+         ~arestorationp/language/spanish/setup.tra~
+         ~arestorationp/language/spanish/game.tra~
+         ~arestorationp/language/spanish/setup.tra~
 
 BEGIN @100
 LABEL Almaterias_Restoration_Project-Restored_Locations
