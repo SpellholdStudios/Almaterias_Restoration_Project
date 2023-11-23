@@ -2732,7 +2732,7 @@ LABEL Almaterias_Restoration_Project-Alternate_Slayer_Change
  BEGIN @1500
 LABEL Almaterias_Restoration_Project-Restored_Waukeens_Promenade_Cutscene
  ACTION_IF GAME_IS ~bg2ee eet~ BEGIN
- COMPILE ~arestorationp/baf/ee/cut01a.baf~
+ COMPILE ~arestorationp/ee/cut01a.baf~
  COMPILE ~arestorationp/baf/cut01c.baf~
  COMPILE ~arestorationp/baf/cut01e.baf~
  END ELSE BEGIN
