@@ -3,9 +3,6 @@ IF
 THEN
   RESPONSE #100
     CutSceneId("CSIren")
-    SetAreaScript("cutskip2",OVERRIDE)
-    SetGlobal("BD_CUTSCENE_BREAKABLE","GLOBAL",2)
-    SetCutSceneBreakable(TRUE)
     MoveViewPoint([2576.908],INSTANT)
     Wait(1)
     FadeFromColor([1.0],0)
